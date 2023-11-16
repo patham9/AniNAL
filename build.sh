@@ -1,4 +1,3 @@
-rm -rf ./OpenNARS-for-Applications
 git clone https://github.com/opennars/OpenNARS-for-Applications
 cd ./OpenNARS-for-Applications/
 git checkout portability
