@@ -63,8 +63,8 @@ void NAL_DerivedEvent(Term conclusionTerm, long conclusionOccurrence, Truth conc
 
 #if SEMANTIC_INFERENCE_NAL_LEVEL >= 1
 //!Syllogistic rules for Inheritance:
-R2( (S --> M), (M --> P), |-, (S --> P), Truth_Deduction )
-/*R2( (A --> B), (A --> C), |-, (C --> B), Truth_Induction )
+/*R2( (S --> M), (M --> P), |-, (S --> P), Truth_Deduction )
+R2( (A --> B), (A --> C), |-, (C --> B), Truth_Induction )
 R2( (A --> C), (B --> C), |-, (B --> A), Truth_Abduction )
 R2( (A --> B), (B --> C), |-, (C --> A), Truth_Exemplification )
 R2( S, (S --> P), |-, P, Truth_Deduction )
