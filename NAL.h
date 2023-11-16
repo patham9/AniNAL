@@ -73,12 +73,12 @@ R2( P, (S --> P), |-, S, Truth_Abduction )*/
 
 #if SEMANTIC_INFERENCE_NAL_LEVEL >= 2
 //!Rules for Similarity:
-R1( (S <-> P), |-, (P <-> S), Truth_StructuralIntersection )
+/*R1( (S <-> P), |-, (P <-> S), Truth_StructuralIntersection )
 R2( (M <-> P), (S <-> M), |-, (S <-> P), Truth_Resemblance )
-/*R2( (P --> M), (S --> M), |-, (S <-> P), Truth_Comparison )
-R2( (M --> P), (M --> S), |-, (S <-> P), Truth_Comparison )*/
+R2( (P --> M), (S --> M), |-, (S <-> P), Truth_Comparison )
+R2( (M --> P), (M --> S), |-, (S <-> P), Truth_Comparison )
 R2( (M --> P), (S <-> M), |-, (S --> P), Truth_Analogy )
-R2( (P --> M), (S <-> M), |-, (P --> S), Truth_Analogy )
+R2( (P --> M), (S <-> M), |-, (P --> S), Truth_Analogy )*/
 /*R2( S, (S <-> P), |-, P, Truth_Analogy )
 R2( S, (P <-> S), |-, P, Truth_Analogy )
 //!Dealing with properties and instances:
@@ -91,11 +91,11 @@ R1( ([A] <-> [B]), |-, (A <-> B), Truth_StructuralIntersection )*/
 #endif
 
 #if SEMANTIC_INFERENCE_NAL_LEVEL >= 3
-//!Set decomposition:
+/*//!Set decomposition:
 R1( ({A B} --> M), |-, <{A} --> M>, Truth_StructuralDeduction )
 R1( ({A B} --> M), |-, <{B} --> M>, Truth_StructuralDeduction )
 R1( (M --> [A B]), |-, <M --> [A]>, Truth_StructuralDeduction )
-R1( (M --> [A B]), |-, <M --> [B]>, Truth_StructuralDeduction )
+R1( (M --> [A B]), |-, <M --> [B]>, Truth_StructuralDeduction )*/
 /*//!Extensional and intensional intersection decomposition:
 R1( ((S | P) --> M), |-, (S --> M), Truth_StructuralDeduction )
 R1( (M --> (S & P)), |-, (M --> S), Truth_StructuralDeduction )
@@ -104,15 +104,15 @@ R1( (M --> (S & P)), |-, (M --> P), Truth_StructuralDeduction )
 R1( ((A ~ S) --> M), |-, (A --> M), Truth_StructuralDeduction )
 R1( (M --> (B - S)), |-, (M --> B), Truth_StructuralDeduction )
 R1( ((A ~ S) --> M), |-, (S --> M), Truth_StructuralDeductionNegated )
-R1( (M --> (B - S)), |-, (M --> S), Truth_StructuralDeductionNegated )
+R1( (M --> (B - S)), |-, (M --> S), Truth_StructuralDeductionNegated )*/
 //!Extensional and intensional intersection composition: (sets via reductions)
 R2( (P --> M), (S --> M), |-, ((P | S) --> M), Truth_Intersection )
-R2( (P --> M), (S --> M), |-, ((P & S) --> M), Truth_Union )
-R2( (P --> M), (S --> M), |-, ((P ~ S) --> M), Truth_Difference )
+//R2( (P --> M), (S --> M), |-, ((P & S) --> M), Truth_Union )
+//R2( (P --> M), (S --> M), |-, ((P ~ S) --> M), Truth_Difference )
 R2( (M --> P), (M --> S), |-, (M --> (P & S)), Truth_Intersection )
-R2( (M --> P), (M --> S), |-, (M --> (P | S)), Truth_Union )
-R2( (M --> P), (M --> S), |-, (M --> (P - S)), Truth_Difference )
-//!Extensional and intensional intersection decomposition:
+//R2( (M --> P), (M --> S), |-, (M --> (P | S)), Truth_Union )
+//R2( (M --> P), (M --> S), |-, (M --> (P - S)), Truth_Difference )
+/*//!Extensional and intensional intersection decomposition:
 R2( (S --> M), ((S | P) --> M), |-, (P --> M), Truth_DecomposePNN )
 R2( (P --> M), ((S | P) --> M), |-, (S --> M), Truth_DecomposePNN )
 R2( (S --> M), ((S & P) --> M), |-, (P --> M), Truth_DecomposeNPP )
@@ -218,10 +218,10 @@ R2VarIntro( (! (A --> C)), (B --> C), |-, ((B --> C) <=> (! (A --> C))), Truth_C
 R2VarIntro( (C --> A), (! (C --> B)), |-, ((! (C --> B)) ==> (C --> A)), Truth_Induction )
 R2VarIntro( (A --> C), (! (B --> C)), |-, ((! (B --> C)) ==> (A --> C)), Truth_Induction )
 R2VarIntro( (C --> A), (! (C --> B)), |-, ((! (C --> B)) <=> (C --> A)), Truth_Comparison )
-R2VarIntro( (A --> C), (! (B --> C)), |-, ((! (B --> C)) <=> (A --> C)), Truth_Comparison )
-R2VarIntro( (C --> A), (C --> B), |-, ((C --> B) && (C --> A)), Truth_Intersection )
-R2VarIntro( (A --> C), (B --> C), |-, ((B --> C) && (A --> C)), Truth_Intersection )
-R2VarIntro( (! (C --> A)), (C --> B), |-, ((C --> B) && (! (C --> A))), Truth_Intersection )
+R2VarIntro( (A --> C), (! (B --> C)), |-, ((! (B --> C)) <=> (A --> C)), Truth_Comparison )*/
+//R2VarIntro( (C --> A), (C --> B), |-, ((C --> B) && (C --> A)), Truth_Intersection )
+//R2VarIntro( (A --> C), (B --> C), |-, ((B --> C) && (A --> C)), Truth_Intersection )
+/*R2VarIntro( (! (C --> A)), (C --> B), |-, ((C --> B) && (! (C --> A))), Truth_Intersection )
 R2VarIntro( (! (A --> C)), (B --> C), |-, ((B --> C) && (! (A --> C))), Truth_Intersection )
 R2VarIntro( (C --> A), (! (C --> B)), |-, ((! (C --> B)) && (C --> A)), Truth_Intersection )
 R2VarIntro( (A --> C), (! (B --> C)), |-, ((! (B --> C)) && (A --> C)), Truth_Intersection )

@@ -215,7 +215,11 @@ document.addEventListener("DOMContentLoaded", function ()
     
     function criteria1(chosenShape, leftShape, middleShape, rightShape)
     {
-        console.log(chosenShape)
+        return chosenShape.shape == middleShape.shape;
+    }
+    
+     function criteria2(chosenShape, leftShape, middleShape, rightShape)
+    {
         return chosenShape.color == middleShape.color;
     }
     
