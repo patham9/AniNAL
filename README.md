@@ -1,2 +1,2 @@
 # AniNAL
-Stripped-down ONA configuration and demonstration for effective basic perceptual reasoning &amp; sensorimotor
+Rule-set-wise trimmed-down and for temporal compounding optimized ONA configuration and demonstration for effective basic perceptual reasoning & sensorimotor.
