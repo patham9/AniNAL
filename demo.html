@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shape Generator</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <textarea style="width: 10%" rows=20 id="stats"></textarea>
+    <textarea style="width: 100%" rows=20 id="output"></textarea>
+    <script>
+
+//>> OUTPUT TO TEXT AREAS
+var stats = document.getElementById('stats');
+function stat(text)
+{
+    stats.value = text + "\n";
+    stats.scrollTop = stats.scrollHeight;
+}
+var output = document.getElementById('output');
+var lastaction = "";
+function print(text)
+{
+    console.log(text);
+    if(text.startsWith("^"))
+    {
+        lastaction = text.split(" ")[0];
+    }
+    output.value += text + "\n";
+    output.scrollTop = output.scrollHeight;
+}
+//<<<<<<<<<<<<<<
+
+//>> NAR MODULE INTERFACE AND INITIALIZATION
+var Module = 
+{
+  arguments: ['nothing'],
+  'print': function(text) { print(text) },
+  'printErr': function(text) { print(text) },
+};
+    </script>
+    <script src="NAR.js"></script>
+    <script>
+function NAR_AddInput(narsese)
+{
+    //console.log("WWWWW: "+narsese)
+    charptr = stringToNewUTF8(narsese + "\n")
+    Module._Shell_ProcessInput(charptr);
+    Module._free(charptr);
+}
+function NAR_INIT()
+{
+    Module._Shell_NARInit();
+}
+var isInitialized = false;
+Module.onRuntimeInitialized = () => 
+{
+    isInitialized = true;
+};
+//<<<<<<<<<<<<<<
+
+document.addEventListener("DOMContentLoaded", function ()
+{
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const shapes = [];
+    function clearCanvas()
+    {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function generateShape()
+    {
+        const shapeTypes = ["triangle", "rectangle"]//, "circle"];
+        const colors = ["red", "blue", "green"];
+        return {
+            shape: shapeTypes[Math.floor(Math.random() * shapeTypes.length)],
+            color: colors[Math.floor(Math.random() * colors.length)]
+        };
+    }
+    function informNARSample(object, position)
+    {
+        NAR_AddInput("<" + position + " --> [" + object.shape + " " +  object.color + "]>. :|:");
+        //NAR_AddInput("<" + position + " --> [" + object.color + "]>. :|:");
+    }
+    
+    var runningID=0;
+    function informNARRL(object1, position1, object2, position2)
+    {
+         NAR_AddInput("(" + "<{" + position1 + "} --> [" + object1.shape + "  " +  object1.color + "]>" + " && " +
+                           "<{" + position2 + "} --> [" + object2.shape + "  " +  object2.color + "]>" + "). :|:");
+    
+         //NAR_AddInput("(" + "<{" + position1 + "} --> [" + object1.color + "]>" + " && " +
+         //                   "<{" + position2 + "} --> [" + object2.color + "]>" + "). :|:");
+       
+    }
+    
+    
+    var runningID=0;
+    function informNAR(object, position)
+    {
+        //works:
+        //NAR_AddInput("<{" + position + "} --> [" + object.shape + " " +  object.color + "]>. :|:");
+        
+        //NAR_AddInput("<{" + position + "} --> [" + object.color + "]>. :|:");
+        //NAR_AddInput("*concurrent");
+        //NAR_AddInput("<{" + position + "} --> [" + object.shape + "]>. :|:");
+        
+        NAR_AddInput("<(" + position + " . " + object.shape + ") --> [" + object.color + "]>. :|:")
+        //NAR_AddInput("<{" + position + "} --> [(color * " + object.color + ") (shape * " + object.shape + ")]>. :|:");
+        
+        //NAR_AddInput("<({" + position + "} * " + object.color + ") --> color>. :|:");
+        
+        runningID +=1;
+        
+        //NAR_AddInput("<([" + object.color + "] & " + object.shape + ") --> [" + position + "]>. :|:");
+        
+    }
+    
+    var middleShape = false;
+    var leftShape = false;
+    var rightShape = false;
+    function addShapes()
+    {
+        clearCanvas();
+        shapes.length = 0;
+
+        middleShape = generateShape();
+        const middleX = canvas.width / 2;
+        const middleY = 50;
+        drawShape(middleShape.shape, middleX, middleY, middleShape.color);
+        shapes.push({ shape: middleShape.shape, x: middleX, y: middleY, location: "middle" });
+
+        leftShape = generateShape();
+        const sideXLeft = 50;
+        const sideY = canvas.height - 100;
+        drawShape(leftShape.shape, sideXLeft, sideY, leftShape.color);
+        shapes.push({ shape: leftShape.shape, x: sideXLeft, y: sideY, location: "left" });
+
+        rightShape = generateShape();
+        const sideXRight = canvas.width - 100;
+        drawShape(rightShape.shape, sideXRight, sideY, rightShape.color);
+        shapes.push({ shape: rightShape.shape, x: sideXRight, y: sideY, location: "right" });
+        
+        if(!criteria1(leftShape, leftShape, middleShape, rightShape) &&
+           !criteria1(rightShape, leftShape, middleShape, rightShape))
+        {
+            addShapes(); //criteria can't be fulfilled, regenerate
+            return;
+        }
+        var s = middleShape.color + middleShape.shape[0] +
+                leftShape.color + leftShape.shape[0] +
+                rightShape.color + rightShape.shape[0]
+        //NAR_AddInput(s + ". :|:")
+        
+        informNAR(middleShape, "middle");
+        NAR_AddInput("*concurrent")
+        informNAR(leftShape, "left");
+        NAR_AddInput("*concurrent")
+        informNAR(rightShape, "right");
+        
+        //informNARSample(middleShape, "middle");
+        
+        //informNARRL(leftShape, "left", rightShape, "right");
+        //NAR_AddInput("*concurrent");
+        
+       
+        NAR_AddInput("8")
+    }
+
+    function drawShape(shape, x, y, color) {
+        ctx.fillStyle = color;
+
+        if (shape === "triangle") {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + 50, y + 50);
+            ctx.lineTo(x - 50, y + 50);
+            ctx.fill();
+        } else if (shape === "rectangle") {
+            ctx.fillRect(x, y, 100, 100);
+        } else if (shape === "circle") {
+            ctx.beginPath();
+            ctx.arc(x, y, 50, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+
+    function isInsideShape(mouseX, mouseY, shape) {
+        if (shape.shape === "triangle" || shape.shape == "circle") {
+            return (
+                mouseY >= shape.y &&
+                mouseY <= shape.y + 50 &&
+                mouseX >= shape.x - 50 &&
+                mouseX <= shape.x + 50
+            );
+        } else if (shape.shape === "rectangle") {
+            return (
+                mouseY >= shape.y &&
+                mouseY <= shape.y + 100 &&
+                mouseX >= shape.x &&
+                mouseX <= shape.x + 100
+            );
+        }
+    }
+
+    var output = document.getElementById('output');
+    function regenerateScene() {
+        output.value = "";
+        addShapes();
+    }
+    
+    function criteria1(chosenShape, leftShape, middleShape, rightShape)
+    {
+        console.log(chosenShape)
+        return chosenShape.color == middleShape.color;
+    }
+    
+    var regtimer = false;
+    function regentimer()
+    {
+        clearInterval(regtimer);
+        regenerateScene()
+        //stat("");
+        regtimer = false;
+    }
+    
+    var sys_successes = 0;
+    var sys_failures = 0;
+    var usr_successes = 0;
+    var usr_failures = 0;
+    
+    function perform(chosenShape, skip)
+    {
+        if(regtimer != false)
+        {
+            //regentimer()
+            //clearInterval(regtimer);
+            //regtimer = false;
+            return;
+        }
+        if(chosenShape != false || skip)
+        {
+            /*if(chosenShape.location == "left") play for sys
+            {
+                NAR_AddInput("^left. :|:");
+            }
+            if(chosenShape.location == "right")
+            {
+                NAR_AddInput("^right. :|:");
+            }*/
+            //lastaction = "";
+            //while(lastaction == "")
+            {
+                NAR_AddInput("G! :|:");
+            }
+            result = ""
+            systemShape = false;
+            if(lastaction == "^left")
+            {
+                systemShape = leftShape;
+            }
+            if(lastaction == "^right")
+            {
+                systemShape = rightShape;
+            }
+            if(systemShape != false && criteria1(systemShape, leftShape, middleShape, rightShape))
+            {
+                NAR_AddInput("G. :|:")
+                result = "correct"
+                sys_successes += 1
+                //NAR_AddInput("10")
+            }
+            else
+            if(systemShape != false)
+            {
+                NAR_AddInput("G. :|: %0.0;0.99999%")
+                result = "wrong"
+                sys_failures += 1
+                //NAR_AddInput("100")
+            }
+            NAR_AddInput("30")
+            stat("SYSTEM DID: " + lastaction + " AND WAS: " + result + 
+                 "\n ratio:" + (sys_successes / (sys_successes + sys_failures)) + 
+                 "\n total:" + (sys_successes + sys_failures))
+            regtimer = setInterval(regentimer, 10); //2000
+        }
+    }
+    
+    function automaticPerform()
+    {
+        perform(false, true);
+    }
+    
+    canvas.addEventListener("click", function (e) {
+        const mouseX = e.clientX - canvas.getBoundingClientRect().left;
+        const mouseY = e.clientY - canvas.getBoundingClientRect().top;
+
+        var chosenShape = false;
+        shapes.forEach((shape) => {
+            if (isInsideShape(mouseX, mouseY, shape))
+            {
+                chosenShape = shape;
+            }
+        });
+        
+        perform(chosenShape, false);
+        
+        setInterval(automaticPerform, 100);
+    });
+
+    //We hadd the shapes once NARS has been initialized:
+    const timer = setInterval(checkCondition, 100);
+    function checkCondition() {
+        if (isInitialized) {
+            NAR_INIT();
+            NAR_AddInput("*volume=0")
+            NAR_AddInput("*babblingops=2")
+            NAR_AddInput("*motorbabbling=0.1")
+            addShapes();
+            clearInterval(timer);
+        } else {
+            console.log("Condition not met.");
+        }
+    }});
+    
+    </script>
+    
+</body>
+</html>
