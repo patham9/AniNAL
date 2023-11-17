@@ -131,8 +131,11 @@
     </select>
     <script src="options.js"></script>
     <script>
-    alert("Welcome! You will compete against NARS in a scenario where you have to click either on the shape on the left, or on the right, you only got 100 chances. You will always receive feedback for your selection, please try to gain the best score! Thank you!")
-    
+    var username = prompt("Welcome, please tell me your name! You will compete against NARS in a scenario where you have to click either on the shape on the left, or on the right, you only got 100 chances. You will always receive feedback for your selection, please try to gain the best score! Thank you!")
+    if(username == "")
+    {
+        username = "anonymous"
+    }
     mode = "Competition"
     function modeSelected(value)
     {
@@ -520,6 +523,10 @@ document.addEventListener("DOMContentLoaded", function ()
                 // Encode array elements
                 var retarr=[];
                 var digits_after_comma = 2;
+                retarr.push("name");
+                retarr.push(username);
+                retarr.push("criteria");
+                retarr.push(selectedCriteria.toString().split("criteria_")[1].split("(")[0])
                 retarr.push("human");
                 retarr.push(human_ratio)
                 retarr.push("sys");
@@ -542,7 +549,7 @@ document.addEventListener("DOMContentLoaded", function ()
                 {
                     outcome = "victory"
                 }
-                alert("Your " + outcome + " is of scientific value, you may create a screenshot of the graph before closing this popup window!");
+                alert("Your " + outcome + " is of scientific value, you may create a screenshot of the graph before closing this popup window! Also the criteria, in case you wonder, was:\n"+selectedCriteria.toString());
                 var url = 'https://script.google.com/macros/s/AKfycbwH_jhis4o8Bd6oBiJ65rpvyS1TxhrmbRAEnXvrWQWQcyoFwqo0IQ_TbKPoZbE5nhh9/exec?data=' + combinedData;
                 window.location.replace(url);
             }
