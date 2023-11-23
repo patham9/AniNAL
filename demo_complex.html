@@ -359,43 +359,10 @@ document.addEventListener("DOMContentLoaded", function ()
             location: loc
         };
     }
-    function informNARSample(object, position)
-    {
-        NAR_AddInput("<" + position + " --> [" + object.shape + " " +  object.color + "]>. :|:");
-        //NAR_AddInput("<" + position + " --> [" + object.color + "]>. :|:");
-    }
-    
-    var runningID=0;
-    function informNARRL(object1, position1, object2, position2)
-    {
-         NAR_AddInput("(" + "<{" + position1 + "} --> [" + object1.shape + "  " +  object1.color + "]>" + " && " +
-                           "<{" + position2 + "} --> [" + object2.shape + "  " +  object2.color + "]>" + "). :|:");
-    
-         //NAR_AddInput("(" + "<{" + position1 + "} --> [" + object1.color + "]>" + " && " +
-         //                   "<{" + position2 + "} --> [" + object2.color + "]>" + "). :|:");
-       
-    }
-    
-    
-    var runningID=0;
+
     function informNAR(object, position)
     {
-        //works:
-        //NAR_AddInput("<{" + position + "} --> [" + object.shape + " " +  object.color + "]>. :|:");
-        
-        //NAR_AddInput("<{" + position + "} --> [" + object.color + "]>. :|:");
-        //NAR_AddInput("*concurrent");
-        //NAR_AddInput("<{" + position + "} --> [" + object.shape + "]>. :|:");
-        
         NAR_AddInput("<(" + position + " * " + object.shape + ") --> [" + object.color + "]>. :|:")
-        //NAR_AddInput("<{" + position + "} --> [(color * " + object.color + ") (shape * " + object.shape + ")]>. :|:");
-        
-        //NAR_AddInput("<({" + position + "} * " + object.color + ") --> color>. :|:");
-        
-        runningID +=1;
-        
-        //NAR_AddInput("<([" + object.color + "] & " + object.shape + ") --> [" + position + "]>. :|:");
-        
     }
     
     var shapesGen = [];
@@ -478,26 +445,14 @@ document.addEventListener("DOMContentLoaded", function ()
         const sideXRight = canvas.width - 100;
         drawShape(rightShape.shape, sideXRight, sideY, rightShape.color);
         shapes.push({ shape: rightShape.shape, color: rightShape.color,  x: sideXRight, y: sideY, location: "right" });
-        
-        
-        var s = middleShape.color + middleShape.shape[0] +
-                leftShape.color + leftShape.shape[0] +
-                rightShape.color + rightShape.shape[0]
-        //NAR_AddInput(s + ". :|:")
-        
+
         informNAR(middleShape, "middle");
         NAR_AddInput("*concurrent")
         informNAR(leftShape, "left");
         NAR_AddInput("*concurrent")
         informNAR(rightShape, "right");
-        
-        //informNARSample(middleShape, "middle");
-        
-        //informNARRL(leftShape, "left", rightShape, "right");
-        //NAR_AddInput("*concurrent");
-        
-       
         NAR_AddInput("8")
+
         shapeIter = (shapeIter + 1) % 100;
     }
 

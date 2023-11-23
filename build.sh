@@ -1,6 +1,7 @@
 git clone https://github.com/opennars/OpenNARS-for-Applications
 cd ./OpenNARS-for-Applications/
 git checkout portability
+git stash
 cp ../Config.h ./src/
 sh build_browser.sh
 sh build.sh

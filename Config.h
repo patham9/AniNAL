@@ -115,7 +115,7 @@
 //Maximum size of the stamp in terms of evidental base id's
 #define STAMP_SIZE 10
 //Maximum Implication table size
-#define TABLE_SIZE 80
+#define TABLE_SIZE 160
 //Maximum compound term size
 #define COMPOUND_TERM_SIZE_MAX 64
 //Max. amount of atomic terms, must be <= 2^(sizeof(Atom)*8)
@@ -123,7 +123,7 @@
 //Amount of buckets for atoms hashmap
 #define ATOMS_HASHTABLE_BUCKETS ATOMS_MAX
 //The type of an atom
-#define Atom unsigned short
+#define Atom unsigned char
 //Maximum size of atomic terms in terms of characters
 #define ATOMIC_TERM_LEN_MAX 32
 //Maximum size of Narsese input in terms of characters
