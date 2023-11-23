@@ -176,8 +176,6 @@
         <option value="52">The left/right dependent on whether it is rectangle</option>
         <option value="53">The left/right dependent on whether it is triangle</option>
         <option value="c53">The left/right dependent on whether it is circle</option>
-        <option value="54">The left</option>
-        <option value="55">The right</option>
     </select>
     Mode:
     <select onchange="modeSelected(this.value)" id="modeSelect">
@@ -199,6 +197,7 @@
         {
             document.getElementById('modeSelect').disabled = true;
         }
+        generateFairShapes();
     }
 
     function randomCriteria()
@@ -215,7 +214,7 @@
                      criteria_31i, criteria_y31i, criteria_32i, criteria_33i, criteria_34i, criteria_y34i, criteria_35i, criteria_36i, criteria_37i, criteria_y37i, criteria_38i, criteria_39i, criteria_c39i, criteria_40i,
                      criteria_41i, criteria_42i, criteria_y42i, criteria_43i, criteria_44i, criteria_45i, criteria_y45i, criteria_46i, criteria_c46i, criteria_47i, criteria_c47i, criteria_48i, criteria_c48i, criteria_y48i, criteria_cy48i,
                      criteria_49, criteria_50,
-                     criteria_51, criteria_y51, criteria_52, criteria_53, criteria_c53, criteria_54, criteria_55];
+                     criteria_51, criteria_y51, criteria_52, criteria_53, criteria_c53];
         return criterias[Math.floor(Math.random() * criterias.length)]
     }
     var selectedCriteria = randomCriteria();
@@ -255,8 +254,8 @@
             case "43i": selectedCriteria = criteria_43i; break; case "44i": selectedCriteria = criteria_44i; break; case "45i": selectedCriteria = criteria_45i; break;
             case "46i": selectedCriteria = criteria_46i; break; case "47i": selectedCriteria = criteria_47i; break; case "48i": selectedCriteria = criteria_48i; break;
             case "49": selectedCriteria = criteria_49; break; case "50": selectedCriteria = criteria_50; break; case "51": selectedCriteria = criteria_51; break;
-            case "52": selectedCriteria = criteria_52; break; case "53": selectedCriteria = criteria_53; break; case "54": selectedCriteria = criteria_54; break;
-            case "55": selectedCriteria = criteria_55; break; case "c6": selectedCriteria = criteria_c6; break; case "c6i": selectedCriteria = criteria_c6i; break;
+            case "52": selectedCriteria = criteria_52; break; case "53": selectedCriteria = criteria_53; break;
+            case "c6": selectedCriteria = criteria_c6; break; case "c6i": selectedCriteria = criteria_c6i; break;
             case "y9": selectedCriteria = criteria_y9; break; case "y9i": selectedCriteria = criteria_y9i; break; case "y12": selectedCriteria = criteria_y12; break;
             case "y12i": selectedCriteria = criteria_y12i; break; case "y15": selectedCriteria = criteria_y15; break; case "y15i": selectedCriteria = criteria_y15i; break;
             case "c13": selectedCriteria = criteria_c13; break; case "c13i": selectedCriteria = criteria_c13i; break; case "c14": selectedCriteria = criteria_c14; break;
@@ -394,37 +393,88 @@ document.addEventListener("DOMContentLoaded", function ()
         
     }
     
+    var shapesGen = [];
+    var shapeAddIndex = 0;
+    var shapeIter = 0;
     var middleShape = false;
     var leftShape = false;
     var rightShape = false;
+    function fairShape(direction)
+    {
+        var mShape = generateShape("middle");
+        var lShape = generateShape("left");
+        var rShape = generateShape("right");
+        var isok = false;
+        if(direction == "left" && selectedCriteria(lShape, lShape, mShape, rShape) && !selectedCriteria(rShape, lShape, mShape, rShape))
+        {
+            isok = true;
+        }
+        if(direction == "right" && selectedCriteria(rShape, lShape, mShape, rShape) && !selectedCriteria(lShape, lShape, mShape, rShape))
+        {
+            isok = true;
+        }
+        if(isok)
+        {
+            shapesGen[shapeAddIndex] = [];
+            shapesGen[shapeAddIndex][0] = mShape;
+            shapesGen[shapeAddIndex][1] = lShape;
+            shapesGen[shapeAddIndex][2] = rShape;
+            shapeAddIndex++;
+        }
+    }
+
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        // While there remain elements to shuffle.
+        while (currentIndex > 0) {
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+              array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    function generateFairShapes()
+    {
+        shapeAddIndex = 0;
+        shapesGen = [];
+        while(shapesGen.length < 50)
+        {
+            fairShape("left")
+        }
+        while(shapesGen.length < 100)
+        {
+            fairShape("right")
+        }
+        shuffle(shapesGen)
+    }
+
     function addShapes()
     {
         clearCanvas();
         shapes.length = 0;
 
-        middleShape = generateShape("middle");
+        middleShape = shapesGen[shapeIter][0];
         const middleX = canvas.width / 2;
         const middleY = 50;
         drawShape(middleShape.shape, middleX, middleY, middleShape.color);
         shapes.push({ shape: middleShape.shape, color: middleShape.color, x: middleX, y: middleY, location: "middle" });
 
-        leftShape = generateShape("left");
+        leftShape = shapesGen[shapeIter][1];
         const sideXLeft = 50;
         const sideY = canvas.height - 100;
         drawShape(leftShape.shape, sideXLeft, sideY, leftShape.color);
         shapes.push({ shape: leftShape.shape, color: leftShape.color, x: sideXLeft, y: sideY, location: "left" });
 
-        rightShape = generateShape("right");
+        rightShape = shapesGen[shapeIter][2];
         const sideXRight = canvas.width - 100;
         drawShape(rightShape.shape, sideXRight, sideY, rightShape.color);
         shapes.push({ shape: rightShape.shape, color: rightShape.color,  x: sideXRight, y: sideY, location: "right" });
         
-        if(!selectedCriteria(leftShape, leftShape, middleShape, rightShape) &&
-           !selectedCriteria(rightShape, leftShape, middleShape, rightShape))
-        {
-            addShapes(); //criteria can't be fulfilled, regenerate
-            return;
-        }
+        
         var s = middleShape.color + middleShape.shape[0] +
                 leftShape.color + leftShape.shape[0] +
                 rightShape.color + rightShape.shape[0]
@@ -443,6 +493,7 @@ document.addEventListener("DOMContentLoaded", function ()
         
        
         NAR_AddInput("8")
+        shapeIter = (shapeIter + 1) % 100;
     }
 
     function drawShape(shape, x, y, color) {
@@ -675,6 +726,7 @@ document.addEventListener("DOMContentLoaded", function ()
             NAR_AddInput("*volume=0")
             NAR_AddInput("*babblingops=2")
             NAR_AddInput("*motorbabbling=0.0")
+            generateFairShapes()
             addShapes();
             clearInterval(timer);
         } else {

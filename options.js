@@ -1621,15 +1621,3 @@ function criteria_c53(chosenShape, leftShape, middleShape, rightShape)
 {
     return chosenShape.shape == "circle";
 }
-
-//The left
-function criteria_54(chosenShape, leftShape, middleShape, rightShape)
-{
-    return chosenShape.location == "left";
-}
-
-//The right
-function criteria_55(chosenShape, leftShape, middleShape, rightShape)
-{
-    return chosenShape.location == "right";
-}
