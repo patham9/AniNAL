@@ -139,7 +139,8 @@
     {
         username = "anonymous"
     }
-    mode = "Competition"
+    var shapesGen = [];
+    var mode = "Competition"
     function modeSelected(value)
     {
         mode = value;
@@ -147,7 +148,7 @@
         {
             document.getElementById('modeSelect').disabled = true;
         }
-        generateFairShapes();
+        shapesGen = [];
     }
 
     function randomCriteria()
@@ -290,8 +291,7 @@ document.addEventListener("DOMContentLoaded", function ()
     {
         NAR_AddInput("<(" + position + " * " + object.shape + ") --> [" + object.color + "]>. :|:")
     }
-    
-    var shapesGen = [];
+
     var shapeAddIndex = 0;
     var shapeIter = 0;
     var middleShape = false;
@@ -352,6 +352,10 @@ document.addEventListener("DOMContentLoaded", function ()
 
     function addShapes()
     {
+        if(shapesGen.length == 0)
+        {
+            generateFairShapes()
+        }
         clearCanvas();
         shapes.length = 0;
 
@@ -614,7 +618,6 @@ document.addEventListener("DOMContentLoaded", function ()
             NAR_AddInput("*volume=0")
             NAR_AddInput("*babblingops=2")
             NAR_AddInput("*motorbabbling=0.0")
-            generateFairShapes()
             addShapes();
             clearInterval(timer);
         } else {
