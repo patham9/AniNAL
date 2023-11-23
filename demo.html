@@ -676,18 +676,16 @@ document.addEventListener("DOMContentLoaded", function ()
       // Function to draw the graph
       function drawGraph() {
         ctx2.clearRect(0, 0, plot.width, plot.height);
-
+        ctx2.strokeStyle = "black";
         // Draw x and y axis
         ctx2.beginPath();
         ctx2.moveTo(0, plot.height / 2);
         ctx2.lineTo(plot.width, plot.height / 2);
         ctx2.stroke();
-
         ctx2.beginPath();
         ctx2.moveTo(0, 0);
         ctx2.lineTo(0, plot.height);
         ctx2.stroke();
-
         // Plot human_values
         ctx2.beginPath();
         ctx2.moveTo(0, plot.height - human_values[0] * plot.height);
@@ -698,7 +696,6 @@ document.addEventListener("DOMContentLoaded", function ()
         }
         ctx2.strokeStyle = "red";
         ctx2.stroke();
-
         // Plot sys_values
         ctx2.beginPath();
         ctx2.moveTo(0, plot.height - sys_values[0] * plot.height);
