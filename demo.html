@@ -15,7 +15,7 @@
     <textarea style="width: 100%" rows=15 id="output"></textarea>
     <!-- The criteria to choose among -->
     Reward criterium:
-    <select onchange="criteriumSelected(this.value)">
+    <select id="criteriaSelector" onchange="criteriumSelected(this.value)">
         <option value="random">Randomly selected, unknown to human as well</option>
         <option value="1">The left/right dependent on whether it has same shape as sample</option>
         <option value="2">The left/right dependent on whether it has same color as sample</option>
@@ -127,8 +127,12 @@
         <option value="Competition">Human vs. NARS competition</option>
         <option value="Evaluation">System evaluation</option>
     </select>
+    <button id="difficulty" onclick="changeDifficulty()">Increase difficulty</button>
     <script src="options.js"></script>
     <script>
+    function changeDifficulty() {
+        window.location.href = 'demo_complex.html';
+    }
     var username = prompt("Welcome, please tell me your name! You will compete against NARS in a scenario where you have to click either on the shape on the left, or on the right, you only have 100 chances. You will always receive feedback for your selection based on a pattern which you and NARS have to figure out, this pattern does not change across the competition, and the correct selection does only depend on the 3 visible objects, and not on prior time steps or choices. Please try to gain the best score! Thank you!")
     if(username == "")
     {
@@ -620,12 +624,14 @@ document.addEventListener("DOMContentLoaded", function ()
     canvas.addEventListener("click", function (e) {
         const mouseX = e.clientX - canvas.getBoundingClientRect().left;
         const mouseY = e.clientY - canvas.getBoundingClientRect().top;
-
         var chosenShape = false;
         shapes.forEach((shape) => {
             if (isInsideShape(mouseX, mouseY, shape))
             {
                 chosenShape = shape;
+                document.getElementById('difficulty').disabled = true;
+                document.getElementById('modeSelect').disabled = true;
+                document.getElementById('criteriaSelector').disabled = true;
             }
         });
         if(chosenShape != false && chosenShape.location == "middle")
