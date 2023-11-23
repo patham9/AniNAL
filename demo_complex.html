@@ -594,7 +594,7 @@ document.addEventListener("DOMContentLoaded", function ()
             plotValue("sys", sys_ratio, true)
             if(mode != "Competition" && (sys_successes + sys_failures) == 100)
             {
-                alert("100 steps reached, press Ok to continue");
+                alert("100 steps reached, press Ok to continue. Also the criteria, in case you wonder, was:\n"+selectedCriteria.toString());
             }
             if(mode == "Competition" && (sys_successes + sys_failures) == 100)
             {
