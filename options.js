@@ -45,7 +45,7 @@ function criteria_2(chosenShape, leftShape, middleShape, rightShape)
 //Left/right dependent on anything has same color as sample
 function criteria_3(chosenShape, leftShape, middleShape, rightShape)
 {
-    if(chosenShape.color == leftShape.color || chosenShape.color == middleShape.color || chosenShape.color == rightShape.color)
+    if(middleShape.color == leftShape.color || middleShape.color == rightShape.color)
     {
         return chosenShape.location == "left";
     }
@@ -55,7 +55,7 @@ function criteria_3(chosenShape, leftShape, middleShape, rightShape)
 //Left/right dependent on anything has same color as sample
 function criteria_3i(chosenShape, leftShape, middleShape, rightShape)
 {
-    if(chosenShape.color == leftShape.color || chosenShape.color == middleShape.color || chosenShape.color == rightShape.color)
+    if(middleShape.color == leftShape.color || middleShape.color == rightShape.color)
     {
         return chosenShape.location == "right";
     }
@@ -65,7 +65,7 @@ function criteria_3i(chosenShape, leftShape, middleShape, rightShape)
 //Left/right dependent on anything has same shape as sample
 function criteria_4(chosenShape, leftShape, middleShape, rightShape)
 {
-    if(chosenShape.shape == leftShape.shape || chosenShape.shape == middleShape.shape || chosenShape.shape == rightShape.shape)
+    if(middleShape.shape == leftShape.shape || middleShape.shape == rightShape.shape)
     {
         return chosenShape.location == "left";
     }
@@ -75,7 +75,7 @@ function criteria_4(chosenShape, leftShape, middleShape, rightShape)
 //Left/right dependent on anything has same shape as sample
 function criteria_4i(chosenShape, leftShape, middleShape, rightShape)
 {
-    if(chosenShape.shape == leftShape.shape || chosenShape.shape == middleShape.shape || chosenShape.shape == rightShape.shape)
+    if(middleShape.shape == leftShape.shape || middleShape.shape == rightShape.shape)
     {
         return chosenShape.location == "right";
     }
