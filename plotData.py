@@ -69,7 +69,7 @@ plt.fill_between(
     alpha=0.1,
 )
 
-plt.plot(humanlistsavg, color="blue", label="Use-repeatedly-working-direction heuristic Avg.")
+plt.plot(humanlistsavg, color="blue", label="Human Avg.")
 plt.fill_between(
     range(len(humanlistsavg)),
     humanlistsavg - np.std(humanlists, axis=0),
