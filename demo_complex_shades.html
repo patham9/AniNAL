@@ -389,7 +389,8 @@ document.addEventListener("DOMContentLoaded", function ()
             locY += "0.9"   
         }
         loc = "" + locX + "_" + locY + ""
-        NAR_AddInput("<(" + loc + " * " + object.shape + ") --> [" + object.color + " " + object.shade + "]>. :|:")
+        //NAR_AddInput("<(" + loc + " * " + object.shape + ") --> [" + object.color + " " + object.shade + "]>. :|:")
+        NAR_AddInput("[[" + loc + " " + object.shape + "] [" + object.color + " " + object.shade + "]]. :|:")
         //NAR_AddInput("<" + position + " --> [" + object.shape + " " + object.color + "]>. :|:")
     }
 
