@@ -4,6 +4,7 @@ git checkout portability
 git stash
 git pull
 cp ../Config.h ./src/
+cp ../NAL.h ./src/
 sh build_browser.sh
 sh build.sh
 cp NAR.wasm ../

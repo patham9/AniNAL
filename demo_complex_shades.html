@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function ()
         {
             locY += "0.9"   
         }
-        loc = "{" + locX + " " + locY + "}"
+        loc = "" + locX + "_" + locY + ""
         NAR_AddInput("<(" + loc + " * " + object.shape + ") --> [" + object.color + " " + object.shade + "]>. :|:")
         //NAR_AddInput("<" + position + " --> [" + object.shape + " " + object.color + "]>. :|:")
     }
@@ -743,8 +743,8 @@ document.addEventListener("DOMContentLoaded", function ()
             NAR_AddInput("*volume=0")
             NAR_AddInput("*babblingops=2")
             NAR_AddInput("*motorbabbling=0.0")
-            NAR_AddInput("*space 10 X")
-            NAR_AddInput("*space 10 Y")
+            //NAR_AddInput("*space 10 X")
+            //NAR_AddInput("*space 10 Y")
             NAR_AddInput("*space 10 B")
             addShapes();
             clearInterval(timer);
