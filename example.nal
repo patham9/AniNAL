@@ -4,21 +4,21 @@
 *space 10 Q
 
 //example:
-<A --> [0.2 0.0]>. :|:
-<B --> [0.0 0.2]>. :|:
+<A --> [P_0.2 Q_0.0]>. :|:
+<B --> [P_0.0 Q_0.2]>. :|:
 7
 ^left. :|:
 G. :|:
 1000
 
 //weed out simple hypotheses: (else via neg. evidence over multiple trials)
-dt=1.0 <(<A --> [0.2 0.0]> &/ ^left) =/> G>. %0%
-dt=1.0 <(<B --> [0.0 0.2]> &/ ^left) =/> G>. %0%
+dt=1.0 <(<A --> [P_0.2 Q_0.0]> &/ ^left) =/> G>. %0%
+dt=1.0 <(<B --> [P_0.0 Q_0.2]> &/ ^left) =/> G>. %0%
 
-<A --> [0.1 0.0]>. :|:
-<B --> [0.0 0.1]>. :|:
+<A --> [P_0.1 Q_0.0]>. :|:
+<B --> [P_0.0 Q_0.1]>. :|:
 7
 G! :|:
-//decision expectation=0.502447 implication: <((<A --> [0.2 0.0]> &/ <B --> [0.0 0.2]>) &/ ^left) =/> G>. Stamp=[3,6,5,4] Truth: frequency=1.000000 confidence=0.061748 dt=1.000000 precondition: (<A --> [0.1 0.0]> &/ <B --> [0.0 0.1]>). :|: Stamp=[9,10] Truth: frequency=1.000000 confidence=0.648000 occurrenceTime=1020
+//decision expectation=0.502393 implication: <((<A --> [P_0.2 Q_0.0]> &/ <B --> [P_0.0 Q_0.2]>) &/ ^left) =/> G>. Stamp=[201,204,203,202] Truth: frequency=1.000000 confidence=0.061748 dt=1.000000 precondition: (<A --> [P_0.1 Q_0.0]> &/ <B --> [P_0.0 Q_0.1]>). :|: Stamp=[207,208] Truth: frequency=1.000000 confidence=0.648000 occurrenceTime=1218
 //^left executed with args
 
