@@ -19,6 +19,6 @@ dt=1.0 <(<B --> [0.0 0.2]> &/ ^left) =/> G>. %0%
 <B --> [0.0 0.1]>. :|:
 7
 G! :|:
-//decision expectation=0.501644 implication: <((<A --> [0.2 0.0]> &/ <B --> [0.0 0.2]>) &/ ^left) =/> G>. Stamp=[5,8,7,6] Truth: frequency=1.000000 confidence=0.051218 dt=1.000000 precondition: (<A --> [0.0]> &/ <B --> [0.2]>). :|: Stamp=[21,22,4] Truth: frequency=1.000000 confidence=0.425153 occurrenceTime=133
+//decision expectation=0.502447 implication: <((<A --> [0.2 0.0]> &/ <B --> [0.0 0.2]>) &/ ^left) =/> G>. Stamp=[3,6,5,4] Truth: frequency=1.000000 confidence=0.061748 dt=1.000000 precondition: (<A --> [0.1 0.0]> &/ <B --> [0.0 0.1]>). :|: Stamp=[9,10] Truth: frequency=1.000000 confidence=0.648000 occurrenceTime=1020
 //^left executed with args
 
