@@ -84,10 +84,6 @@
 /*---------------------------------*/
 //Unification depth, 2^(n+1)-1, n=2 levels lead to value 7
 #define UNIFICATION_DEPTH 31
-//Similarity query in unification. (for AniNAL)
-#define SIMILARITY_QUERY true
-//Variable introduction for set events. (for AniNAL)
-#define SET_EVENT_VAR_INTRO true
 //If var intro should be allowed at all (includes sensorimotor!)
 #define ALLOW_VAR_INTRO true
 
@@ -111,7 +107,7 @@
 /* Space parameters */
 /*------------------*/
 //Maximum amount of concepts
-#define CONCEPTS_MAX 4096
+#define CONCEPTS_MAX 1024
 //Amount of buckets for concept hashmap
 #define CONCEPTS_HASHTABLE_BUCKETS CONCEPTS_MAX
 //Maximum amount of belief events attention buffer holds
@@ -125,7 +121,7 @@
 //Maximum size of the stamp in terms of evidental base id's
 #define STAMP_SIZE 10
 //Maximum Implication table size
-#define TABLE_SIZE 120
+#define TABLE_SIZE 400
 //Maximum compound term size
 #define COMPOUND_TERM_SIZE_MAX 64
 //Max. amount of atomic terms, must be <= 2^(sizeof(Atom)*8)

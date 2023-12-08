@@ -17,6 +17,28 @@
     Reward criterium:
     <select id="criteriaSelector" onchange="criteriumSelected(this.value)">
         <option value="random">Randomly selected, unknown to human as well</option>
+        
+        <option value="-1">The left/right dependent on whether it is brighter than sample</option>
+        <option value="-2">The left/right dependent on whether it is darker than sample</option>
+        <option value="-3">The left/right dependent on whether it is equally bright as sample</option>
+        <option value="-4">Left/right dependent on whether left is brighter than sample</option>
+        <option value="-5">Right/left dependent on whether left is brighter than sample</option>
+        <option value="-6">Left/right dependent on whether right is brighter than sample</option>
+        <option value="-7">Right/left dependent on whether right is brighter than sample</option>        
+        <option value="-8">Left/right dependent on whether left is darker than sample</option>
+        <option value="-9">Right/left dependent on whether left is darker than sample</option>
+        <option value="-10">Left/right dependent on whether right is darker than sample</option>
+        <option value="-11">Right/left dependent on whether right is darker than sample</option>
+        <option value="-12">Left/right dependent on whether left is darker than right</option>
+        <option value="-13">Right/left dependent on whether left is darker than right</option>
+        <option value="-14">Left/right dependent on whether left is equally bright as sample</option>
+        <option value="-15">Right/left dependent on whether left is equally bright as sample</option>
+        <option value="-16">Left/right dependent on whether right is equally bright as sample</option>
+        <option value="-17">Right/left dependent on whether right is equally bright as sample</option>
+        <option value="-18">Left/right dependent on whether left is equally bright as right</option>
+        <option value="-19">Right/left dependent on whether left is equally bright as right</option>
+        
+        
         <option value="1">The left/right dependent on whether it has same shape as sample</option>
         <option value="2">The left/right dependent on whether it has same color as sample</option>
         <!-- invertibles -->
@@ -388,9 +410,26 @@ document.addEventListener("DOMContentLoaded", function ()
         {
             locY += "0.9"   
         }
-        loc = "" + locX + "_" + locY + ""
+        loc = "[" + locX + " " + locY + "]"
         //NAR_AddInput("<(" + loc + " * " + object.shape + ") --> [" + object.color + " " + object.shade + "]>. :|:")
-        NAR_AddInput("[[" + loc + " " + object.shape + "] [" + object.color + " " + object.shade + "]]. :|:")
+        //NAR_AddInput("[[" + locX + " " + object.shape + "] [" + object.color + " " + object.shade + "]]. :|:")
+        
+        //NAR_AddInput(locX + ". :|:")
+        //NAR_AddInput("*concurrent") <(location * featureValue) --> featureType>
+        //NAR_AddInput("(" + position + " &/ <" + object.shape + " --> shape>). :|:")
+        //NAR_AddInput("*concurrent")
+        //NAR_AddInput("(" + position + " &/ <" + object.color + " --> shape>). :|:")
+        
+        
+        NAR_AddInput("<(" + position + " * " + object.shape + ") --> shape>). :|:")
+        NAR_AddInput("*concurrent")
+        NAR_AddInput("<(" + position + " * " + object.color + ") --> color>). :|:")
+        
+        
+       // NAR_AddInput("*concurrent")
+       // NAR_AddInput("(<(" + position + " --> pos> && <" + object.shade + " --> shade>). :|:")
+        
+        
         //NAR_AddInput("<" + position + " --> [" + object.shape + " " + object.color + "]>. :|:")
     }
 
@@ -744,8 +783,8 @@ document.addEventListener("DOMContentLoaded", function ()
             NAR_AddInput("*volume=0")
             NAR_AddInput("*babblingops=2")
             NAR_AddInput("*motorbabbling=0.0")
-            //NAR_AddInput("*space 10 X")
-            //NAR_AddInput("*space 10 Y")
+            NAR_AddInput("*space 10 X")
+            NAR_AddInput("*space 10 Y")
             NAR_AddInput("*space 10 B")
             addShapes();
             clearInterval(timer);
