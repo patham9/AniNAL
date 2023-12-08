@@ -1621,3 +1621,197 @@ function criteria_c53(chosenShape, leftShape, middleShape, rightShape)
 {
     return chosenShape.shape == "circle";
 }
+
+function brighter(shape1, shape2)
+{
+    return parseFloat(shape1.shade.replace("B_","")) > parseFloat(shape2.shade.replace("B_",""));
+}
+
+function darker(shape1, shape2)
+{
+    return parseFloat(shape1.shade.replace("B_","")) < parseFloat(shape2.shade.replace("B_",""));
+}
+
+function equal_bright(shape1, shape2)
+{
+    return shape1.shade == shape2.shade;
+}
+
+//The left/right dependent on whether it is brighter than sample
+function criteria_m1(chosenShape, leftShape, middleShape, rightShape)
+{
+    return brighter(chosenShape, middleShape);
+}
+
+//The left/right dependent on whether it is darker than sample
+function criteria_m2(chosenShape, leftShape, middleShape, rightShape)
+{
+    return darker(chosenShape, middleShape);
+}
+
+//The left/right dependent on whether it is equally bright as sample
+function criteria_m3(chosenShape, leftShape, middleShape, rightShape)
+{
+    return equal_bright(chosenShape, middleShape);
+}
+
+//Left/right dependent on whether left is brighter than sample
+function criteria_m4(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(brighter(leftShape, middleShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+//Right/left dependent on whether left is brighter than sample
+function criteria_m5(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(brighter(leftShape, middleShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}
+
+//Left/right dependent on whether right is brighter than sample
+function criteria_m6(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(brighter(rightShape, middleShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+//Right/left dependent on whether right is brighter than sample
+function criteria_m7(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(brighter(rightShape, middleShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}
+
+//Left/right dependent on whether left is darker than sample
+function criteria_m8(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(darker(leftShape, middleShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+
+//Right/left dependent on whether left is darker than sample
+function criteria_m9(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(darker(leftShape, middleShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}
+
+//Left/right dependent on whether right is darker than sample
+function criteria_m10(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(darker(rightShape, middleShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+//Right/left dependent on whether right is darker than sample
+function criteria_m11(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(darker(rightShape, middleShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}
+
+//Left/right dependent on whether left is darker than right
+function criteria_m12(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(darker(leftShape, rightShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+//Right/left dependent on whether left is darker than right
+function criteria_m13(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(darker(leftShape, rightShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}
+
+//Left/right dependent on whether left is equally bright as sample
+function criteria_m14(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(equal_bright(leftShape, middleShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+//Right/left dependent on whether left is equally bright as sample
+function criteria_m15(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(equal_bright(leftShape, middleShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}
+
+//Left/right dependent on whether right is equally bright as sample
+function criteria_m16(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(equal_bright(rightShape, middleShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+//Right/left dependent on whether right is equally bright as sample
+function criteria_m17(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(equal_bright(rightShape, middleShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}
+
+//Left/right dependent on whether left is equally bright as right
+function criteria_m18(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(equal_bright(leftShape, rightShape))
+    {
+        return chosenShape.location == "left";
+    }
+    return chosenShape.location == "right";
+}
+
+//Right/left dependent on whether left is equally bright as right
+function criteria_m19(chosenShape, leftShape, middleShape, rightShape)
+{
+    if(equal_bright(leftShape, rightShape))
+    {
+        return chosenShape.location == "right";
+    }
+    return chosenShape.location == "left";
+}

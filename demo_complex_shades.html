@@ -18,26 +18,25 @@
     <select id="criteriaSelector" onchange="criteriumSelected(this.value)">
         <option value="random">Randomly selected, unknown to human as well</option>
         
-        <option value="-1">The left/right dependent on whether it is brighter than sample</option>
-        <option value="-2">The left/right dependent on whether it is darker than sample</option>
-        <option value="-3">The left/right dependent on whether it is equally bright as sample</option>
-        <option value="-4">Left/right dependent on whether left is brighter than sample</option>
-        <option value="-5">Right/left dependent on whether left is brighter than sample</option>
-        <option value="-6">Left/right dependent on whether right is brighter than sample</option>
-        <option value="-7">Right/left dependent on whether right is brighter than sample</option>        
-        <option value="-8">Left/right dependent on whether left is darker than sample</option>
-        <option value="-9">Right/left dependent on whether left is darker than sample</option>
-        <option value="-10">Left/right dependent on whether right is darker than sample</option>
-        <option value="-11">Right/left dependent on whether right is darker than sample</option>
-        <option value="-12">Left/right dependent on whether left is darker than right</option>
-        <option value="-13">Right/left dependent on whether left is darker than right</option>
-        <option value="-14">Left/right dependent on whether left is equally bright as sample</option>
-        <option value="-15">Right/left dependent on whether left is equally bright as sample</option>
-        <option value="-16">Left/right dependent on whether right is equally bright as sample</option>
-        <option value="-17">Right/left dependent on whether right is equally bright as sample</option>
-        <option value="-18">Left/right dependent on whether left is equally bright as right</option>
-        <option value="-19">Right/left dependent on whether left is equally bright as right</option>
-        
+        <option value="m1">The left/right dependent on whether it is brighter than sample</option>
+        <option value="m2">The left/right dependent on whether it is darker than sample</option>
+        <option value="m3">The left/right dependent on whether it is equally bright as sample</option>
+        <option value="m4">Left/right dependent on whether left is brighter than sample</option>
+        <option value="m5">Right/left dependent on whether left is brighter than sample</option>
+        <option value="m6">Left/right dependent on whether right is brighter than sample</option>
+        <option value="m7">Right/left dependent on whether right is brighter than sample</option>
+        <option value="m8">Left/right dependent on whether left is darker than sample</option>
+        <option value="m9">Right/left dependent on whether left is darker than sample</option>
+        <option value="m10">Left/right dependent on whether right is darker than sample</option>
+        <option value="m11">Right/left dependent on whether right is darker than sample</option>
+        <option value="m12">Left/right dependent on whether left is darker than right</option>
+        <option value="m13">Right/left dependent on whether left is darker than right</option>
+        <option value="m14">Left/right dependent on whether left is equally bright as sample</option>
+        <option value="m15">Right/left dependent on whether left is equally bright as sample</option>
+        <option value="m16">Left/right dependent on whether right is equally bright as sample</option>
+        <option value="m17">Right/left dependent on whether right is equally bright as sample</option>
+        <option value="m18">Left/right dependent on whether left is equally bright as right</option>
+        <option value="m19">Right/left dependent on whether left is equally bright as right</option>
         
         <option value="1">The left/right dependent on whether it has same shape as sample</option>
         <option value="2">The left/right dependent on whether it has same color as sample</option>
@@ -242,12 +241,26 @@
                      criteria_31i, criteria_y31i, criteria_32i, criteria_33i, criteria_34i, criteria_y34i, criteria_35i, criteria_36i, criteria_37i, criteria_y37i, criteria_38i, criteria_39i, criteria_c39i, criteria_40i,
                      criteria_41i, criteria_42i, criteria_y42i, criteria_43i, criteria_44i, criteria_45i, criteria_y45i, criteria_46i, criteria_c46i, criteria_47i, criteria_c47i, criteria_48i, criteria_c48i, criteria_y48i, criteria_cy48i,
                      criteria_49, criteria_50,
-                     criteria_51, criteria_y51, criteria_52, criteria_53, criteria_c53];
+                     criteria_51, criteria_y51, criteria_52, criteria_53, criteria_c53,
+                     criteria_m1, criteria_m2, criteria_m3, criteria_m4, criteria_m5, criteria_m6, criteria_m7,
+                     criteria_m8, criteria_m9, criteria_m10, criteria_m11, criteria_m12, criteria_m13, criteria_m14,
+                     criteria_m15, criteria_m16, criteria_m17, criteria_m18, criteria_m19];
         return criterias[Math.floor(Math.random() * criterias.length)]
     }
     var selectedCriteria = randomCriteria();
     function criteriumSelected(value) {
         switch(value) {
+            case "m1": selectedCriteria = criteria_m1; break; case "m2": selectedCriteria = criteria_m2; break;
+            case "m3": selectedCriteria = criteria_m3; break; case "m4": selectedCriteria = criteria_m4; break;
+            case "m5": selectedCriteria = criteria_m5; break; case "m6": selectedCriteria = criteria_m6; break;
+            case "m7": selectedCriteria = criteria_m7; break; case "m8": selectedCriteria = criteria_m8; break;
+            case "m9": selectedCriteria = criteria_m9; break; case "m10": selectedCriteria = criteria_m10; break;
+            case "m11": selectedCriteria = criteria_m11; break; case "m12": selectedCriteria = criteria_m12; break;
+            case "m13": selectedCriteria = criteria_m13; break; case "m14": selectedCriteria = criteria_m14; break;
+            case "m15": selectedCriteria = criteria_m15; break; case "m16": selectedCriteria = criteria_m16; break;
+            case "m17": selectedCriteria = criteria_m17; break; case "m18": selectedCriteria = criteria_m18; break;
+            case "m19": selectedCriteria = criteria_m19;
+            
             case "1": selectedCriteria = criteria_1; break; case "2": selectedCriteria = criteria_2; break;
             case "3": selectedCriteria = criteria_3; break;
             case "4": selectedCriteria = criteria_4; break; case "5": selectedCriteria = criteria_5; break; case "6": selectedCriteria = criteria_6; break;
@@ -411,26 +424,11 @@ document.addEventListener("DOMContentLoaded", function ()
             locY += "0.9"   
         }
         loc = "[" + locX + " " + locY + "]"
-        //NAR_AddInput("<(" + loc + " * " + object.shape + ") --> [" + object.color + " " + object.shade + "]>. :|:")
-        //NAR_AddInput("[[" + locX + " " + object.shape + "] [" + object.color + " " + object.shade + "]]. :|:")
-        
-        //NAR_AddInput(locX + ". :|:")
-        //NAR_AddInput("*concurrent") <(location * featureValue) --> featureType>
-        //NAR_AddInput("(" + position + " &/ <" + object.shape + " --> shape>). :|:")
-        //NAR_AddInput("*concurrent")
-        //NAR_AddInput("(" + position + " &/ <" + object.color + " --> shape>). :|:")
-        
-        
-        NAR_AddInput("<(" + position + " * " + object.shape + ") --> shape>). :|:")
+        NAR_AddInput("<(" + locX + " * " + object.shape + ") --> shape>. :|:")
         NAR_AddInput("*concurrent")
-        NAR_AddInput("<(" + position + " * " + object.color + ") --> color>). :|:")
-        
-        
-       // NAR_AddInput("*concurrent")
-       // NAR_AddInput("(<(" + position + " --> pos> && <" + object.shade + " --> shade>). :|:")
-        
-        
-        //NAR_AddInput("<" + position + " --> [" + object.shape + " " + object.color + "]>. :|:")
+        NAR_AddInput("<(" + locX + " * " + object.color + ") --> color>. :|:")
+        NAR_AddInput("*concurrent")
+        NAR_AddInput("<(" + locX + " * " + object.shade + ") --> shade>. :|:")
     }
 
     var shapeAddIndex = 0;

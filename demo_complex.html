@@ -363,7 +363,9 @@ document.addEventListener("DOMContentLoaded", function ()
 
     function informNAR(object, position)
     {
-        NAR_AddInput("[[" + position + " " + object.shape + "] [" + object.color + "]]. :|:")
+        NAR_AddInput("<(" + position + " * " + object.shape + ") --> shape>. :|:")
+        NAR_AddInput("*concurrent")
+        NAR_AddInput("<(" + position + " * " + object.color + ") --> color>. :|:")
     }
 
     var shapeAddIndex = 0;
