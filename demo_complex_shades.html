@@ -204,11 +204,11 @@
         <option value="Evaluation">System evaluation</option>
     </select>
     Option:
-    <button id="difficulty" onclick="changeDifficulty()">Decrease difficulty (one less shape, one less color)</button>
+    <button id="difficulty" onclick="changeDifficulty()">Decrease difficulty (remove shades)</button>
     <script src="options.js"></script>
     <script>
     function changeDifficulty() {
-        window.location.href = 'demo.html';
+        window.location.href = 'demo_complex.html';
     }
     var username = prompt("Welcome, please tell me your name! You will compete against NARS in a scenario where you have to click either on the shape on the left, or on the right, you only have 100 chances. You will always receive feedback for your selection based on a pattern which you and NARS have to figure out, this pattern does not change across the competition, and the correct selection does only depend on the 3 visible objects, and not on prior time steps or choices. Please try to gain the best score! Thank you!")
     if(username == "")
@@ -390,6 +390,7 @@ document.addEventListener("DOMContentLoaded", function ()
         const shapes = ["triangle", "rectangle", "circle"];
         const colors = ["red", "blue", "green", "yellow"];
         const shades = ["B_0.0", "B_0.5", "B_0.9"];
+        //const shades = ["B_0.0", "B_0.1", "B_0.2", "B_0.3", "B_0.4", "B_0.5", "B_0.6", "B_0.7", "B_0.8", "B_0.9"];
         return {
             shape: shapes[Math.floor(Math.random() * shapes.length)],
             color: colors[Math.floor(Math.random() * colors.length)],
@@ -414,16 +415,6 @@ document.addEventListener("DOMContentLoaded", function ()
         {
             locX += "0.5"
         }
-        locY = "Y_"
-        if(position == "middle")
-        {
-            locY += "0.0"
-        }
-        else
-        {
-            locY += "0.9"   
-        }
-        loc = "[" + locX + " " + locY + "]"
         NAR_AddInput("<(" + locX + " * " + object.shape + ") --> shape>. :|:")
         NAR_AddInput("*concurrent")
         NAR_AddInput("<(" + locX + " * " + object.color + ") --> color>. :|:")
@@ -781,8 +772,8 @@ document.addEventListener("DOMContentLoaded", function ()
             NAR_AddInput("*volume=0")
             NAR_AddInput("*babblingops=2")
             NAR_AddInput("*motorbabbling=0.0")
+            //NAR_AddInput("*decisionthreshold=0.51") //alternative: NAR_AddInput("*motorbabbling=0.1")
             //NAR_AddInput("*space 10 X")
-            //NAR_AddInput("*space 10 Y")
             //NAR_AddInput("*space 10 B")
             addShapes();
             clearInterval(timer);
