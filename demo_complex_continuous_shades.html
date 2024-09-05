@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AniNAL demo</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <textarea style="width: 10%" rows=22 id="stats"></textarea>
+     <canvas id="plot" width="300" height="200"></canvas>
+    <textarea style="width: 100%" rows=15 id="output"></textarea>
+    <!-- The criteria to choose among -->
+    Reward criterium:
+    <select id="criteriaSelector" onchange="criteriumSelected(this.value)">
+        <option value="random">Randomly selected, unknown to human as well</option>
+        
+        <option value="m1">The left/right dependent on whether it is brighter than sample</option>
+        <option value="m2">The left/right dependent on whether it is darker than sample</option>
+        <option value="m3">The left/right dependent on whether it is equally bright as sample</option>
+        <option value="m4">Left/right dependent on whether left is brighter than sample</option>
+        <option value="m5">Right/left dependent on whether left is brighter than sample</option>
+        <option value="m6">Left/right dependent on whether right is brighter than sample</option>
+        <option value="m7">Right/left dependent on whether right is brighter than sample</option>
+        <option value="m8">Left/right dependent on whether left is darker than sample</option>
+        <option value="m9">Right/left dependent on whether left is darker than sample</option>
+        <option value="m10">Left/right dependent on whether right is darker than sample</option>
+        <option value="m11">Right/left dependent on whether right is darker than sample</option>
+        <option value="m12">Left/right dependent on whether left is darker than right</option>
+        <option value="m13">Right/left dependent on whether left is darker than right</option>
+        <option value="m14">Left/right dependent on whether left is equally bright as sample</option>
+        <option value="m15">Right/left dependent on whether left is equally bright as sample</option>
+        <option value="m16">Left/right dependent on whether right is equally bright as sample</option>
+        <option value="m17">Right/left dependent on whether right is equally bright as sample</option>
+        <option value="m18">Left/right dependent on whether left is equally bright as right</option>
+        <option value="m19">Right/left dependent on whether left is equally bright as right</option>
+        
+        <option value="1">The left/right dependent on whether it has same shape as sample</option>
+        <option value="2">The left/right dependent on whether it has same color as sample</option>
+        <!-- invertibles -->
+        <option value="3">Left/right dependent on anything has same color as sample</option>
+        <option value="3i">Right/left dependent on anything has same color as sample</option>
+        <option value="4">Left/right dependent on anything has same shape as sample</option>
+        <option value="4i">Right/left dependent on anything has same shape as sample</option>
+        <option value="5">Left/right dependent on whether sample is a rectangle</option>
+        <option value="5i">Right/left dependent on whether sample is a rectangle</option>
+        <option value="6">Left/right dependent on whether sample is a triangle</option>
+        <option value="6i">Right/left dependent on whether sample is a triangle</option>
+        <option value="c6">Left/right dependent on whether sample is a circle</option>
+        <option value="c6i">Right/left dependent on whether sample is a circle</option>
+        <option value="7">Left/right dependent on whether sample is blue</option>
+        <option value="7i">Right/left dependent on whether sample is blue</option>
+        <option value="8">Left/right dependent on whether sample is red</option>
+        <option value="8i">Right/left dependent on whether sample is red</option>
+        <option value="9">Left/right dependent on whether sample is green</option>
+        <option value="9i">Right/left dependent on whether sample is green</option>
+        <option value="y9">Left/right dependent on whether sample is yellow</option>
+        <option value="y9i">Right/left dependent on whether sample is yellow</option>
+        <option value="10">Left/right dependent on whether sample is a blue rectangle</option>
+        <option value="10i">Right/left dependent on whether sample is a blue rectangle</option>
+        <option value="11">Left/right dependent on whether sample is a red rectangle</option>
+        <option value="11i">Right/left dependent on whether sample is a red rectangle</option>
+        <option value="12">Left/right dependent on whether sample is a green rectangle</option>
+        <option value="12i">Right/left dependent on whether sample is a green rectangle</option>
+        <option value="y12">Left/right dependent on whether sample is a yellow rectangle</option>
+        <option value="y12i">Right/left dependent on whether sample is a yellow rectangle</option>
+        <option value="13">Left/right dependent on whether sample is a blue triangle</option>
+        <option value="13i">Right/left dependent on whether sample is a blue triangle</option>
+        <option value="14">Left/right dependent on whether sample is a red triangle</option>
+        <option value="14i">Right/left dependent on whether sample is a red triangle</option>
+        <option value="15">Left/right dependent on whether sample is a green triangle</option>
+        <option value="15i">Right/left dependent on whether sample is a green triangle</option>
+        <option value="y15">Left/right dependent on whether sample is a yellow triangle</option>
+        <option value="y15i">Right/left dependent on whether sample is a yellow triangle</option>
+        <option value="c13">Left/right dependent on whether sample is a blue circle</option>
+        <option value="c13i">Right/left dependent on whether sample is a blue circle</option>
+        <option value="c14">Left/right dependent on whether sample is a red circle</option>
+        <option value="c14i">Right/left dependent on whether sample is a red circle</option>
+        <option value="c15">Left/right dependent on whether sample is a green circle</option>
+        <option value="c15i">Right/left dependent on whether sample is a green circle</option>
+        <option value="cy15">Left/right dependent on whether sample is a yellow circle</option>
+        <option value="cy15i">Right/left dependent on whether sample is a yellow circle</option>
+        <option value="16">Left/right dependent on whether left is a rectangle</option>
+        <option value="16i">Right/left dependent on whether left is a rectangle</option>
+        <option value="17">Left/right dependent on whether left is a triangle</option>
+        <option value="17i">Right/left dependent on whether left is a triangle</option>
+        <option value="c17">Left/right dependent on whether left is a circle</option>
+        <option value="c17i">Right/left dependent on whether left is a circle</option>
+        <option value="18">Left/right dependent on whether left is blue</option>
+        <option value="18i">Right/left dependent on whether left is blue</option>
+        <option value="19">Left/right dependent on whether left is red</option>
+        <option value="19i">Right/left dependent on whether left is red</option>
+        <option value="20">Left/right dependent on whether left is green</option>
+        <option value="20i">Right/left dependent on whether left is green</option>
+        <option value="y20">Left/right dependent on whether left is yellow</option>
+        <option value="y20i">Right/left dependent on whether left is yellow</option>
+        <option value="21">Left/right dependent on whether left is a blue rectangle</option>
+        <option value="21i">Right/left dependent on whether left is a blue rectangle</option>
+        <option value="22">Left/right dependent on whether left is a red rectangle</option>
+        <option value="22i">Right/left dependent on whether left is a red rectangle</option>
+        <option value="23">Left/right dependent on whether left is a green rectangle</option>
+        <option value="23i">Right/left dependent on whether left is a green rectangle</option>
+        <option value="y23">Left/right dependent on whether left is a yellow rectangle</option>
+        <option value="y23i">Right/left dependent on whether left is a yellow rectangle</option>
+        <option value="24">Left/right dependent on whether left is a blue triangle</option>
+        <option value="24i">Right/left dependent on whether left is a blue triangle</option>
+        <option value="25">Left/right dependent on whether left is a red triangle</option>
+        <option value="25i">Right/left dependent on whether left is a red triangle</option>
+        <option value="26">Left/right dependent on whether left is a green triangle</option>
+        <option value="26i">Right/left dependent on whether left is a green triangle</option>
+        <option value="y26">Left/right dependent on whether left is a yellow triangle</option>
+        <option value="y26i">Right/left dependent on whether left is a yellow triangle</option>
+        <option value="c24">Left/right dependent on whether left is a blue circle</option>
+        <option value="c24i">Right/left dependent on whether left is a blue circle</option>
+        <option value="c25">Left/right dependent on whether left is a red circle</option>
+        <option value="c25i">Right/left dependent on whether left is a red circle</option>
+        <option value="c26">Left/right dependent on whether left is a green circle</option>
+        <option value="c26i">Right/left dependent on whether left is a green circle</option>
+        <option value="cy26">Left/right dependent on whether left is a yellow circle</option>
+        <option value="cy26i">Right/left dependent on whether left is a yellow circle</option>
+        <option value="27">Left/right dependent on whether right is a rectangle</option>
+        <option value="27i">Right/left dependent on whether right is a rectangle</option>
+        <option value="28">Left/right dependent on whether right is a triangle</option>
+        <option value="28i">Right/left dependent on whether right is a triangle</option>
+        <option value="c28">Left/right dependent on whether right is a circle</option>
+        <option value="c28i">Right/left dependent on whether right is a circle</option>
+        <option value="29">Left/right dependent on whether right is blue</option>
+        <option value="29i">Right/left dependent on whether right is blue</option>
+        <option value="30">Left/right dependent on whether right is red</option>
+        <option value="30i">Right/left dependent on whether right is red</option>
+        <option value="31">Left/right dependent on whether right is green</option>
+        <option value="31i">Right/left dependent on whether right is green</option>
+        <option value="y31">Left/right dependent on whether right is yellow</option>
+        <option value="y31i">Right/left dependent on whether right is yellow</option>
+        <option value="32">Left/right dependent on whether right is a blue rectangle</option>
+        <option value="32i">Right/left dependent on whether right is a blue rectangle</option>
+        <option value="33">Left/right dependent on whether right is a red rectangle</option>
+        <option value="33i">Right/left dependent on whether right is a red rectangle</option>
+        <option value="34">Left/right dependent on whether right is a green rectangle</option>
+        <option value="34i">Right/left dependent on whether right is a green rectangle</option>
+        <option value="y34">Left/right dependent on whether right is a yellow rectangle</option>
+        <option value="y34i">Right/left dependent on whether right is a yellow rectangle</option>
+        <option value="35">Left/right dependent on whether right is a blue triangle</option>
+        <option value="35i">Right/left dependent on whether right is a blue triangle</option>
+        <option value="36">Left/right dependent on whether right is a red triangle</option>
+        <option value="36i">Right/left dependent on whether right is a red triangle</option>
+        <option value="37">Left/right dependent on whether right is a green triangle</option>
+        <option value="37i">Right/left dependent on whether right is a green triangle</option>
+        <option value="y37">Left/right dependent on whether right is a yellow triangle</option>
+        <option value="y37i">Right/left dependent on whether right is a yellow triangle</option>
+        <option value="38">Left/right dependent on whether anything is a rectangle</option>
+        <option value="38i">Right/left dependent on whether anything is a rectangle</option>
+        <option value="39">Left/right dependent on whether anything is a triangle</option>
+        <option value="39i">Right/left dependent on whether anything is a triangle</option>
+        <option value="c39">Left/right dependent on whether anything is a circle</option>
+        <option value="c39i">Right/left dependent on whether anything is a circle</option>
+        <option value="40">Left/right dependent on whether anything is blue</option>
+        <option value="40i">Right/left dependent on whether anything is blue</option>
+        <option value="41">Left/right dependent on whether anything is red</option>
+        <option value="41i">Right/left dependent on whether anything is red</option>
+        <option value="42">Left/right dependent on whether anything is green</option>
+        <option value="42i">Right/left dependent on whether anything is green</option>
+        <option value="y42">Left/right dependent on whether anything is yellow</option>
+        <option value="y42i">Right/left dependent on whether anything is yellow</option>
+        <option value="43">Left/right dependent on whether anything is a blue rectangle</option>
+        <option value="43i">Right/left dependent on whether anything is a blue rectangle</option>
+        <option value="44">Left/right dependent on whether anything is a red rectangle</option>
+        <option value="44i">Right/left dependent on whether anything is a red rectangle</option>
+        <option value="45">Left/right dependent on whether anything is a green rectangle</option>
+        <option value="45i">Right/left dependent on whether anything is a green rectangle</option>
+        <option value="y45">Left/right dependent on whether anything is a yellow rectangle</option>
+        <option value="y45i">Right/left dependent on whether anything is a yellow rectangle</option>
+        <option value="46">Left/right dependent on whether anything is a blue triangle</option>
+        <option value="46i">Right/left dependent on whether anything is a blue triangle</option>
+        <option value="47">Left/right dependent on whether anything is a red triangle</option>
+        <option value="47i">Right/left dependent on whether anything is a red triangle</option>
+        <option value="48">Left/right dependent on whether anything is a green triangle</option>
+        <option value="48i">Right/left dependent on whether anything is a green triangle</option>
+        <option value="y48">Left/right dependent on whether anything is a yellow triangle</option>
+        <option value="y48i">Right/left dependent on whether anything is a yellow triangle</option>
+        <option value="c46">Left/right dependent on whether anything is a blue circle</option>
+        <option value="c46i">Right/left dependent on whether anything is a blue circle</option>
+        <option value="c47">Left/right dependent on whether anything is a red circle</option>
+        <option value="c47i">Right/left dependent on whether anything is a red circle</option>
+        <option value="c48">Left/right dependent on whether anything is a green circle</option>
+        <option value="c48i">Right/left dependent on whether anything is a green circle</option>
+        <option value="cy48">Left/right dependent on whether anything is a yellow circle</option>
+        <option value="cy48i">Right/left dependent on whether anything is a yellow circle</option>
+        <!-- end -->
+        <option value="49">The left/right dependent on whether it is blue</option>
+        <option value="50">The left/right dependent on whether it is red</option>
+        <option value="51">The left/right dependent on whether it is green</option>
+        <option value="y51">The left/right dependent on whether it is yellow</option>
+        <option value="52">The left/right dependent on whether it is rectangle</option>
+        <option value="53">The left/right dependent on whether it is triangle</option>
+        <option value="c53">The left/right dependent on whether it is circle</option>
+    </select>
+    Mode:
+    <select onchange="modeSelected(this.value)" id="modeSelect">
+        <option value="Competition">Human vs. NARS competition</option>
+        <option value="Evaluation">System evaluation</option>
+    </select>
+    Option:
+    <button id="difficulty" onclick="changeDifficulty()">Decrease difficulty (remove shades)</button>
+    <script src="options.js"></script>
+    <script>
+    function changeDifficulty() {
+        window.location.href = 'demo_complex.html';
+    }
+    var username = prompt("Welcome, please tell me your name! You will compete against NARS in a scenario where you have to click either on the shape on the left, or on the right, you only have 100 chances. You will always receive feedback for your selection based on a pattern which you and NARS have to figure out, this pattern does not change across the competition, and the correct selection does only depend on the 3 visible objects, and not on prior time steps or choices. Please try to gain the best score! Thank you!")
+    if(username == "")
+    {
+        username = "anonymous"
+    }
+    var shapesGen = [];
+    var mode = "Competition"
+    function modeSelected(value)
+    {
+        mode = value;
+        if(mode == "Evaluation")
+        {
+            document.getElementById('modeSelect').disabled = true;
+        }
+        shapesGen = [];
+    }
+
+    function randomCriteria()
+    {
+        criterias = [criteria_1, criteria_2,
+                     criteria_3, criteria_4, criteria_5, criteria_6, criteria_c6, criteria_7, criteria_8, criteria_9, criteria_y9, criteria_10,
+                     criteria_11, criteria_12, criteria_y12, criteria_13, criteria_c13, criteria_14, criteria_c14, criteria_15, criteria_c15, criteria_cy15, criteria_y15, criteria_16, criteria_17, criteria_c17, criteria_18, criteria_19, criteria_20, criteria_y20,
+                     criteria_21, criteria_22, criteria_23, criteria_y23, criteria_24, criteria_c24, criteria_25, criteria_c25, criteria_26, criteria_c26, criteria_y26, criteria_cy26, criteria_27, criteria_28, criteria_c28, criteria_29, criteria_30,
+                     criteria_31, criteria_y31, criteria_32, criteria_33, criteria_34, criteria_y34, criteria_35, criteria_36, criteria_37, criteria_y37, criteria_38, criteria_39, criteria_c39, criteria_40,
+                     criteria_41, criteria_42, criteria_y42, criteria_43, criteria_44, criteria_45, criteria_y45, criteria_46, criteria_c46, criteria_47, criteria_c47, criteria_48, criteria_c48, criteria_y48, criteria_cy48,
+                     criteria_3i, criteria_4i, criteria_5i, criteria_6i, criteria_c6i, criteria_7i, criteria_8i, criteria_9i, criteria_y9i, criteria_10i,
+                     criteria_11i, criteria_12i, criteria_y12i, criteria_13i, criteria_c13i, criteria_14i, criteria_c14i, criteria_15i, criteria_c15i, criteria_y15i, criteria_cy15i, criteria_16i, criteria_17i, criteria_c17i, criteria_18i, criteria_19i, criteria_20i, criteria_y20i,
+                     criteria_21i, criteria_22i, criteria_23i, criteria_y23i, criteria_24i, criteria_c24i, criteria_25i, criteria_c25i, criteria_26i, criteria_c26i, criteria_y26i, criteria_cy26i, criteria_27i, criteria_28i, criteria_c28i, criteria_29i, criteria_30i,
+                     criteria_31i, criteria_y31i, criteria_32i, criteria_33i, criteria_34i, criteria_y34i, criteria_35i, criteria_36i, criteria_37i, criteria_y37i, criteria_38i, criteria_39i, criteria_c39i, criteria_40i,
+                     criteria_41i, criteria_42i, criteria_y42i, criteria_43i, criteria_44i, criteria_45i, criteria_y45i, criteria_46i, criteria_c46i, criteria_47i, criteria_c47i, criteria_48i, criteria_c48i, criteria_y48i, criteria_cy48i,
+                     criteria_49, criteria_50,
+                     criteria_51, criteria_y51, criteria_52, criteria_53, criteria_c53,
+                     criteria_m1, criteria_m2, criteria_m3, criteria_m4, criteria_m5, criteria_m6, criteria_m7,
+                     criteria_m8, criteria_m9, criteria_m10, criteria_m11, criteria_m12, criteria_m13, criteria_m14,
+                     criteria_m15, criteria_m16, criteria_m17, criteria_m18, criteria_m19];
+        return criterias[Math.floor(Math.random() * criterias.length)]
+    }
+    var selectedCriteria = randomCriteria();
+    function criteriumSelected(value) {
+        switch(value) {
+            case "m1": selectedCriteria = criteria_m1; break; case "m2": selectedCriteria = criteria_m2; break;
+            case "m3": selectedCriteria = criteria_m3; break; case "m4": selectedCriteria = criteria_m4; break;
+            case "m5": selectedCriteria = criteria_m5; break; case "m6": selectedCriteria = criteria_m6; break;
+            case "m7": selectedCriteria = criteria_m7; break; case "m8": selectedCriteria = criteria_m8; break;
+            case "m9": selectedCriteria = criteria_m9; break; case "m10": selectedCriteria = criteria_m10; break;
+            case "m11": selectedCriteria = criteria_m11; break; case "m12": selectedCriteria = criteria_m12; break;
+            case "m13": selectedCriteria = criteria_m13; break; case "m14": selectedCriteria = criteria_m14; break;
+            case "m15": selectedCriteria = criteria_m15; break; case "m16": selectedCriteria = criteria_m16; break;
+            case "m17": selectedCriteria = criteria_m17; break; case "m18": selectedCriteria = criteria_m18; break;
+            case "m19": selectedCriteria = criteria_m19;
+            
+            case "1": selectedCriteria = criteria_1; break; case "2": selectedCriteria = criteria_2; break;
+            case "3": selectedCriteria = criteria_3; break;
+            case "4": selectedCriteria = criteria_4; break; case "5": selectedCriteria = criteria_5; break; case "6": selectedCriteria = criteria_6; break;
+            case "7": selectedCriteria = criteria_7; break; case "8": selectedCriteria = criteria_8; break; case "9": selectedCriteria = criteria_9; break;
+            case "10": selectedCriteria = criteria_10; break; case "11": selectedCriteria = criteria_11; break; case "12": selectedCriteria = criteria_12; break;
+            case "13": selectedCriteria = criteria_13; break; case "14": selectedCriteria = criteria_14; break; case "15": selectedCriteria = criteria_15; break;
+            case "16": selectedCriteria = criteria_16; break; case "17": selectedCriteria = criteria_17; break; case "18": selectedCriteria = criteria_18; break;
+            case "19": selectedCriteria = criteria_19; break; case "20": selectedCriteria = criteria_20; break; case "21": selectedCriteria = criteria_21; break;
+            case "22": selectedCriteria = criteria_22; break; case "23": selectedCriteria = criteria_23; break; case "24": selectedCriteria = criteria_24; break;
+            case "25": selectedCriteria = criteria_25; break; case "26": selectedCriteria = criteria_26; break; case "27": selectedCriteria = criteria_27; break;
+            case "28": selectedCriteria = criteria_28; break; case "29": selectedCriteria = criteria_29; break; case "30": selectedCriteria = criteria_30; break;
+            case "31": selectedCriteria = criteria_31; break; case "32": selectedCriteria = criteria_32; break; case "33": selectedCriteria = criteria_33; break;
+            case "34": selectedCriteria = criteria_34; break; case "35": selectedCriteria = criteria_35; break; case "36": selectedCriteria = criteria_36; break;
+            case "37": selectedCriteria = criteria_37; break; case "38": selectedCriteria = criteria_38; break; case "39": selectedCriteria = criteria_39; break;
+            case "40": selectedCriteria = criteria_40; break; case "41": selectedCriteria = criteria_41; break; case "42": selectedCriteria = criteria_42; break;
+            case "43": selectedCriteria = criteria_43; break; case "44": selectedCriteria = criteria_44; break; case "45": selectedCriteria = criteria_45; break;
+            case "46": selectedCriteria = criteria_46; break; case "47": selectedCriteria = criteria_47; break; case "48": selectedCriteria = criteria_48; break;
+            case "3i": selectedCriteria = criteria_3i; break;
+            case "4i": selectedCriteria = criteria_4i; break; case "5i": selectedCriteria = criteria_5i; break; case "6i": selectedCriteria = criteria_6i; break;
+            case "7i": selectedCriteria = criteria_7i; break; case "8i": selectedCriteria = criteria_8i; break; case "9i": selectedCriteria = criteria_9i; break;
+            case "10i": selectedCriteria = criteria_10i; break; case "11i": selectedCriteria = criteria_11i; break; case "12i": selectedCriteria = criteria_12i; break;
+            case "13i": selectedCriteria = criteria_13i; break; case "14i": selectedCriteria = criteria_14i; break; case "15i": selectedCriteria = criteria_15i; break;
+            case "16i": selectedCriteria = criteria_16i; break; case "17i": selectedCriteria = criteria_17i; break; case "18i": selectedCriteria = criteria_18i; break;
+            case "19i": selectedCriteria = criteria_19i; break; case "20i": selectedCriteria = criteria_20i; break; case "21i": selectedCriteria = criteria_21i; break;
+            case "22i": selectedCriteria = criteria_22i; break; case "23i": selectedCriteria = criteria_23i; break; case "24i": selectedCriteria = criteria_24i; break;
+            case "25i": selectedCriteria = criteria_25i; break; case "26i": selectedCriteria = criteria_26i; break; case "27i": selectedCriteria = criteria_27i; break;
+            case "28i": selectedCriteria = criteria_28i; break; case "29i": selectedCriteria = criteria_29i; break; case "30i": selectedCriteria = criteria_30i; break;
+            case "31i": selectedCriteria = criteria_31i; break; case "32i": selectedCriteria = criteria_32i; break; case "33i": selectedCriteria = criteria_33i; break;
+            case "34i": selectedCriteria = criteria_34i; break; case "35i": selectedCriteria = criteria_35i; break; case "36i": selectedCriteria = criteria_36i; break;
+            case "37i": selectedCriteria = criteria_37i; break; case "38i": selectedCriteria = criteria_38i; break; case "39i": selectedCriteria = criteria_39i; break;
+            case "40i": selectedCriteria = criteria_40i; break; case "41i": selectedCriteria = criteria_41i; break; case "42i": selectedCriteria = criteria_42i; break;
+            case "43i": selectedCriteria = criteria_43i; break; case "44i": selectedCriteria = criteria_44i; break; case "45i": selectedCriteria = criteria_45i; break;
+            case "46i": selectedCriteria = criteria_46i; break; case "47i": selectedCriteria = criteria_47i; break; case "48i": selectedCriteria = criteria_48i; break;
+            case "49": selectedCriteria = criteria_49; break; case "50": selectedCriteria = criteria_50; break; case "51": selectedCriteria = criteria_51; break;
+            case "52": selectedCriteria = criteria_52; break; case "53": selectedCriteria = criteria_53; break;
+            case "c6": selectedCriteria = criteria_c6; break; case "c6i": selectedCriteria = criteria_c6i; break;
+            case "y9": selectedCriteria = criteria_y9; break; case "y9i": selectedCriteria = criteria_y9i; break; case "y12": selectedCriteria = criteria_y12; break;
+            case "y12i": selectedCriteria = criteria_y12i; break; case "y15": selectedCriteria = criteria_y15; break; case "y15i": selectedCriteria = criteria_y15i; break;
+            case "c13": selectedCriteria = criteria_c13; break; case "c13i": selectedCriteria = criteria_c13i; break; case "c14": selectedCriteria = criteria_c14; break;
+            case "c14i": selectedCriteria = criteria_c14i; break; case "c15": selectedCriteria = criteria_c15; break; case "c15i": selectedCriteria = criteria_c15i; break;
+            case "cy15": selectedCriteria = criteria_cy15; break; case "cy15i": selectedCriteria = criteria_cy15i; break; case "c17": selectedCriteria = criteria_c17; break;
+            case "c17i": selectedCriteria = criteria_c17i; break; case "y20": selectedCriteria = criteria_y20; break; case "y20i": selectedCriteria = criteria_y20i; break;
+            case "y23": selectedCriteria = criteria_y23; break; case "y23i": selectedCriteria = criteria_y23i; break; case "y26": selectedCriteria = criteria_y26; break;
+            case "y26i": selectedCriteria = criteria_y26i; break; case "c24": selectedCriteria = criteria_c24; break; case "c24i": selectedCriteria = criteria_c24i; break;
+            case "c25": selectedCriteria = criteria_c25; break; case "c25i": selectedCriteria = criteria_c25i; break; case "c26": selectedCriteria = criteria_c26; break;
+            case "c26i": selectedCriteria = criteria_c26i; break; case "cy26": selectedCriteria = criteria_cy26; break; case "cy26i": selectedCriteria = criteria_cy26i; break;
+            case "c28": selectedCriteria = criteria_c28; break; case "c28i": selectedCriteria = criteria_c28i; break; case "y31": selectedCriteria = criteria_y31; break;
+            case "y31i": selectedCriteria = criteria_y31i; break; case "y34": selectedCriteria = criteria_y34; break; case "y34i": selectedCriteria = criteria_y34i; break;
+            case "y37": selectedCriteria = criteria_y37; break; case "y37i": selectedCriteria = criteria_y37i; break; case "y39": selectedCriteria = criteria_y39; break;
+            case "y39i": selectedCriteria = criteria_y39i; break; case "y42": selectedCriteria = criteria_y42; break; case "y42i": selectedCriteria = criteria_y42i; break;
+            case "y45": selectedCriteria = criteria_y45; break; case "y45i": selectedCriteria = criteria_y45i; break; case "y48": selectedCriteria = criteria_y48; break;
+            case "y48i": selectedCriteria = criteria_y48i; break; case "c46": selectedCriteria = criteria_c46; break; case "c46i": selectedCriteria = criteria_c46i; break;
+            case "c47": selectedCriteria = criteria_c47; break; case "c47i": selectedCriteria = criteria_c47i; break; case "c48": selectedCriteria = criteria_c48; break; 
+            case "c48i": selectedCriteria = criteria_c48i; break; case "cy48": selectedCriteria = criteria_cy48; break; case "cy48i": selectedCriteria = criteria_cy48i; break;
+            case "y51": selectedCriteria = criteria_y51; break; case "c53": selectedCriteria = criteria_c53; break;
+            case "random": selectedCriteria = randomCriteria(); break;
+            default: console.log("Invalid option selected");
+        }
+        if(value != "random")
+        {
+            document.getElementById('modeSelect').value = "Evaluation";
+            modeSelected("Evaluation")
+        }
+    }
+
+//>> OUTPUT TO TEXT AREAS
+var stats = document.getElementById('stats');
+function stat(text)
+{
+    stats.value = text + "\n";
+    stats.scrollTop = stats.scrollHeight;
+}
+var output = document.getElementById('output');
+var lastaction = "";
+function print(text)
+{
+    console.log(text);
+    if(text.startsWith("^"))
+    {
+        lastaction = text.split(" ")[0];
+    }
+    output.value += text + "\n";
+    //output.scrollTop = output.scrollHeight;
+}
+//<<<<<<<<<<<<<<
+
+//>> NAR MODULE INTERFACE AND INITIALIZATION
+var Module = 
+{
+  arguments: ['nothing'],
+  'print': function(text) { print(text) },
+  'printErr': function(text) { print(text) },
+};
+    </script>
+    <script src="NAR.js"></script>
+    <script>
+
+function NAR_AddInput(narsese)
+{
+    //console.log("WWWWW: "+narsese)
+    charptr = stringToNewUTF8(narsese + "\n")
+    Module._Shell_ProcessInput(charptr);
+    Module._free(charptr);
+}
+function NAR_INIT()
+{
+    Module._Shell_NARInit();
+}
+var isInitialized = false;
+Module.onRuntimeInitialized = () => 
+{
+    isInitialized = true;
+};
+//<<<<<<<<<<<<<<
+
+document.addEventListener("DOMContentLoaded", function ()
+{
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const shapes = [];
+    function clearCanvas()
+    {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function generateShape(loc)
+    {
+        const shapes = ["triangle", "rectangle", "circle"];
+        const colors = ["red", "blue", "green", "yellow"];
+        //const shades = ["B_0.0", "B_0.5", "B_0.9"];
+        const shades = ["B_0.0", "B_0.1", "B_0.2", "B_0.3", "B_0.4", "B_0.5", "B_0.6", "B_0.7", "B_0.8", "B_0.9"];
+        return {
+            shape: shapes[Math.floor(Math.random() * shapes.length)],
+            color: colors[Math.floor(Math.random() * colors.length)],
+            shade: shades[Math.floor(Math.random() * shades.length)],
+            location: loc
+        };
+    }
+
+    function informNAR(object, position)
+    {
+        locX = "X_"
+        if(position == "left")
+        {
+            locX += "0.0"
+        }
+        else
+        if(position == "right")
+        {
+            locX += "0.9"
+        }
+        else
+        {
+            locX += "0.5"
+        }
+        NAR_AddInput("<(" + locX + " * " + object.shape + ") --> shape>. :|:")
+        NAR_AddInput("*concurrent")
+        NAR_AddInput("<(" + locX + " * " + object.color + ") --> color>. :|:")
+        NAR_AddInput("*concurrent")
+        NAR_AddInput("<(" + locX + " * " + object.shade + ") --> shade>. :|:")
+    }
+
+    var shapeAddIndex = 0;
+    var shapeIter = 0;
+    var middleShape = false;
+    var leftShape = false;
+    var rightShape = false;
+    function fairShape(direction)
+    {
+        var mShape = generateShape("middle");
+        var lShape = generateShape("left");
+        var rShape = generateShape("right");
+        var isok = false;
+        if(direction == "left" && selectedCriteria(lShape, lShape, mShape, rShape) && !selectedCriteria(rShape, lShape, mShape, rShape))
+        {
+            isok = true;
+        }
+        if(direction == "right" && selectedCriteria(rShape, lShape, mShape, rShape) && !selectedCriteria(lShape, lShape, mShape, rShape))
+        {
+            isok = true;
+        }
+        if(isok)
+        {
+            shapesGen[shapeAddIndex] = [];
+            shapesGen[shapeAddIndex][0] = mShape;
+            shapesGen[shapeAddIndex][1] = lShape;
+            shapesGen[shapeAddIndex][2] = rShape;
+            shapeAddIndex++;
+        }
+    }
+
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        // While there remain elements to shuffle.
+        while (currentIndex > 0) {
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+              array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    function generateFairShapes()
+    {
+        shapeAddIndex = 0;
+        shapesGen = [];
+        while(shapesGen.length < 50)
+        {
+            fairShape("left")
+        }
+        while(shapesGen.length < 100)
+        {
+            fairShape("right")
+        }
+        shuffle(shapesGen)
+    }
+
+    function addShapes()
+    {
+        if(shapesGen.length == 0)
+        {
+            generateFairShapes()
+        }
+        clearCanvas();
+        shapes.length = 0;
+
+        middleShape = shapesGen[shapeIter][0];
+        const middleX = canvas.width / 2;
+        const middleY = 50;
+        drawShape(middleShape.shade, middleShape.shape, middleX, middleY, middleShape.color);
+        shapes.push({ shade: middleShape.shade, shape: middleShape.shape, color: middleShape.color, x: middleX, y: middleY, location: "middle" });
+
+        leftShape = shapesGen[shapeIter][1];
+        const sideXLeft = 50;
+        const sideY = canvas.height - 100;
+        drawShape(leftShape.shade, leftShape.shape, sideXLeft, sideY, leftShape.color);
+        shapes.push({ shade: leftShape.shade, shape: leftShape.shape, color: leftShape.color, x: sideXLeft, y: sideY, location: "left" });
+
+        rightShape = shapesGen[shapeIter][2];
+        const sideXRight = canvas.width - 100;
+        drawShape(rightShape.shade, rightShape.shape, sideXRight, sideY, rightShape.color);
+        shapes.push({ shade: rightShape.shade, shape: rightShape.shape, color: rightShape.color,  x: sideXRight, y: sideY, location: "right" });
+
+        informNAR(middleShape, "middle");
+        NAR_AddInput("*concurrent")
+        informNAR(leftShape, "left");
+        NAR_AddInput("*concurrent")
+        informNAR(rightShape, "right");
+        NAR_AddInput("8")
+
+        shapeIter = (shapeIter + 1) % 100;
+    }
+
+
+    function adjustBrightness(color, brightness) {
+        // Convert named color to hex
+        let hexColor = color;
+
+        // Convert hex color to RGB
+        let bigint = parseInt(hexColor.slice(1), 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+
+        // Adjust brightness (clamp between 0 and 255)
+        r = Math.max(0, Math.min(255, r + brightness));
+        g = Math.max(0, Math.min(255, g + brightness));
+        b = Math.max(0, Math.min(255, b + brightness));
+
+        // Convert back to hex
+        let adjustedHexColor = `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
+
+        return adjustedHexColor;
+    }
+
+    function drawShape(shade, shape, x, y, color) {
+        var shadeval = parseFloat(shade.replace("B_",""))*255
+        ctx.fillStyle = color
+        ctx.fillStyle = adjustBrightness(ctx.fillStyle, shadeval);
+
+        if (shape === "triangle") {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + 50, y + 50);
+            ctx.lineTo(x - 50, y + 50);
+            ctx.fill();
+        } else if (shape === "rectangle") {
+            ctx.fillRect(x, y, 100, 100);
+        } else if (shape === "circle") {
+            ctx.beginPath();
+            ctx.arc(x, y, 50, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+
+    function isInsideShape(mouseX, mouseY, shape) {
+        if (shape.shape === "triangle" || shape.shape == "circle") {
+            return (
+                mouseY >= shape.y &&
+                mouseY <= shape.y + 50 &&
+                mouseX >= shape.x - 50 &&
+                mouseX <= shape.x + 50
+            );
+        } else if (shape.shape === "rectangle") {
+            return (
+                mouseY >= shape.y &&
+                mouseY <= shape.y + 100 &&
+                mouseX >= shape.x &&
+                mouseX <= shape.x + 100
+            );
+        }
+    }
+
+    var output = document.getElementById('output');
+    function regenerateScene() {
+        output.value = "";
+        addShapes();
+    }
+
+    var regtimer = false;
+    function regentimer()
+    {
+        clearInterval(regtimer);
+        regenerateScene()
+        //stat("");
+        regtimer = false;
+    }
+    
+    var sys_successes = 0;
+    var sys_failures = 0;
+    var usr_successes = 0;
+    var usr_failures = 0;
+    var time = 0;
+    
+    function perform(chosenShape, skip)
+    {
+        if(regtimer != false)
+        {
+            //regentimer()
+            //clearInterval(regtimer);
+            //regtimer = false;
+            return;
+        }
+        if(chosenShape != false || skip)
+        {
+            time++
+            lastaction = "";
+            NAR_AddInput("G! :|:");
+            if(lastaction == "") //always choose an option
+            {
+                actions = ["^left", "^right"]
+                lastaction = actions[Math.floor(Math.random() * actions.length)]
+                NAR_AddInput(lastaction + ". :|:")
+            }
+            result = ""
+            systemShape = false;
+            if(lastaction == "^left")
+            {
+                systemShape = leftShape;
+            }
+            if(lastaction == "^right")
+            {
+                systemShape = rightShape;
+            }
+            if(systemShape != false && selectedCriteria(systemShape, leftShape, middleShape, rightShape))
+            {
+                NAR_AddInput("G. :|:")
+                result = "correct"
+                sys_successes += 1
+                //NAR_AddInput("10")
+            }
+            else
+            if(systemShape != false)
+            {
+                NAR_AddInput("G. :|: %0.0;0.99999%")
+                result = "wrong"
+                sys_failures += 1
+                //NAR_AddInput("100")
+            }
+            NAR_AddInput("30")
+            human = "\n\n";
+            var human_ratio = 0;
+            var sys_ratio = 0;
+            if(mode == "Competition")
+            {
+                humanIsRight = selectedCriteria(chosenShape, leftShape, middleShape, rightShape);
+                console.log(chosenShape)
+                resultHuman = "wrong";
+                if(humanIsRight)
+                {
+                    resultHuman = "correct"
+                    usr_successes++
+                }
+                else
+                {
+                    usr_failures++
+                }
+                alert(resultHuman)
+                if((usr_successes + usr_failures) != 0)
+                {
+                    human_ratio = (usr_successes / (usr_successes + usr_failures))
+                }
+                plotValue("human", human_ratio, false)
+                human = "\n\nHUMAN DID: ^" + chosenShape.location + " AND WAS: " + resultHuman +
+                 "\n ratio:" + human_ratio +
+                 "\n total:" + (usr_successes + usr_failures)
+            }
+            if((sys_successes + sys_failures) != 0)
+            {
+                sys_ratio = (sys_successes / (sys_successes + sys_failures))
+            }
+            if(mode == "Competition") //do not reveal system's choices in competition mode
+            {
+                stat("SYSTEM WAS: " + result +
+                 "\n ratio:" + sys_ratio +
+                 "\n total:" + (sys_successes + sys_failures) + human + "\n\nt=" + time + "/100")
+            }
+            else
+            {
+                stat("SYSTEM DID: " + lastaction + " AND WAS: " + result +
+                 "\n ratio:" + sys_ratio +
+                 "\n total:" + (sys_successes + sys_failures) + human+ "\n\nt=" + time + "/100")
+            }
+            plotValue("sys", sys_ratio, true)
+            if(mode != "Competition" && (sys_successes + sys_failures) == 100)
+            {
+                alert("100 steps reached, press Ok to continue. Also the criteria, in case you wonder, was:\n"+selectedCriteria.toString());
+            }
+            if(mode == "Competition" && (sys_successes + sys_failures) == 100)
+            {
+                // Encode array elements
+                var retarr=[];
+                var digits_after_comma = 2;
+                retarr.push("name");
+                retarr.push(username);
+                retarr.push("criteria");
+                retarr.push(selectedCriteria.toString().split("criteria_")[1].split("(")[0])
+                retarr.push("human");
+                retarr.push(human_ratio)
+                retarr.push("sys");
+                retarr.push(sys_ratio)
+                retarr.push("humanrun")
+                for (var i = 0; i < human_values.length; i++) {
+                  retarr.push(human_values[i].toFixed(digits_after_comma));
+                }
+                retarr.push("sysrun")
+                for (var i = 0; i < sys_values.length; i++) {
+                  retarr.push(sys_values[i].toFixed(digits_after_comma));
+                }
+                var combinedData = retarr.toString();
+                var outcome = "tie"
+                if(sys_ratio > human_ratio)
+                {
+                    outcome = "defeat"
+                }
+                if(sys_ratio < human_ratio)
+                {
+                    outcome = "victory"
+                }
+                alert("Your " + outcome + " is of scientific value, you may create a screenshot of the graph before closing this popup window! Also the criteria, in case you wonder, was:\n"+selectedCriteria.toString());
+                var url = 'https://script.google.com/macros/s/AKfycbw-iWD4WplfNkfKnRgAyp1MneXV29jQ8VMIue1g_24R2jOy5Hr4AdLsCzesLRrEiIvEjg/exec?data=' + combinedData;
+                window.location.replace(url);
+            }
+            regtimer = setInterval(regentimer, 10); //2000
+
+        }
+    }
+
+    function automaticPerform()
+    {
+        perform(false, true);
+    }
+
+    canvas.addEventListener("click", function (e) {
+        const mouseX = e.clientX - canvas.getBoundingClientRect().left;
+        const mouseY = e.clientY - canvas.getBoundingClientRect().top;
+        var chosenShape = false;
+        shapes.forEach((shape) => {
+            if (isInsideShape(mouseX, mouseY, shape))
+            {
+                chosenShape = shape;
+                document.getElementById('difficulty').disabled = true;
+                document.getElementById('modeSelect').disabled = true;
+                document.getElementById('criteriaSelector').disabled = true;
+            }
+        });
+        if(chosenShape != false && chosenShape.location == "middle")
+        {
+            return;
+        }
+        
+        perform(chosenShape, false);
+    });
+
+    //We hadd the shapes once NARS has been initialized:
+    const timer = setInterval(checkCondition, 100);
+    const updatetimer = setInterval(update, 100);
+    function update() {
+        if(mode == "Evaluation")
+        {
+            setInterval(automaticPerform, 100);
+        }
+    }
+    function checkCondition() {
+        if (isInitialized) {
+            NAR_INIT();
+            NAR_AddInput("*volume=0")
+            NAR_AddInput("*babblingops=2")
+            //NAR_AddInput("*motorbabbling=0.1")
+            NAR_AddInput("*decisionthreshold=0.51") //alternative: NAR_AddInput("*motorbabbling=0.1")
+            //NAR_AddInput("*space 10 X")
+            NAR_AddInput("*space 10 B")
+            addShapes();
+            clearInterval(timer);
+        } else {
+            console.log("Condition not met.");
+        }
+    }
+
+    // Get the plot element and its context
+      var plot = document.getElementById("plot");
+      var ctx2 = plot.getContext("2d");
+
+      // Set initial variables
+      var human_values = [];
+      var sys_values = [];
+
+      // Function to draw the graph
+      function drawGraph() {
+        ctx2.clearRect(0, 0, plot.width, plot.height);
+        ctx2.strokeStyle = "black";
+        // Draw x and y axis
+        ctx2.beginPath();
+        ctx2.moveTo(0, plot.height / 2);
+        ctx2.lineTo(plot.width, plot.height / 2);
+        ctx2.stroke();
+        ctx2.beginPath();
+        ctx2.moveTo(0, 0);
+        ctx2.lineTo(0, plot.height);
+        ctx2.stroke();
+        // Plot human_values
+        ctx2.beginPath();
+        ctx2.moveTo(0, plot.height - human_values[0] * plot.height);
+        for (var i = 1; i < human_values.length; i++) {
+          var x = (i / human_values.length) * plot.width;
+          var y = plot.height - human_values[i] * plot.height;
+          ctx2.lineTo(x, y);
+        }
+        ctx2.strokeStyle = "red";
+        ctx2.stroke();
+        // Plot sys_values
+        ctx2.beginPath();
+        ctx2.moveTo(0, plot.height - sys_values[0] * plot.height);
+        for (var i = 1; i < sys_values.length; i++) {
+          var x = (i / sys_values.length) * plot.width;
+          var y = plot.height - sys_values[i] * plot.height;
+          ctx2.lineTo(x, y);
+        }
+        ctx2.strokeStyle = "blue";
+        ctx2.stroke();
+      }
+
+      // Function to handle each click
+      function plotValue(who, value, draw) {
+        // Add the value to the array
+        if(who == "human")
+        {
+            human_values.push(value);
+        }
+        else
+        if(who == "sys")
+        {
+            sys_values.push(value);
+        }
+        if(draw)
+        {
+            drawGraph();
+        }
+      }
+
+      // Function to handle each click
+      function handleClick() {
+        var value = Math.random();
+        plotValue("sys", value, true);
+        document.addEventListener("click", handleClick);
+        drawGraph();
+      }
+    });
+    </script>
+    
+</body>
+</html>
