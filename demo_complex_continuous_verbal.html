@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AniNAL demo</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <textarea style="width: 10%" rows=22 id="stats"></textarea>
+     <canvas id="plot" width="300" height="200"></canvas>
+    <textarea style="width: 100%" rows=15 id="output"></textarea>
+    <!-- The criteria to choose among -->
+    Reward criterium:
+    <select id="criteriaSelector" onchange="criteriumSelected(this.value)">
+        <option value="random">Randomly selected, unknown to human as well</option>
+        
+<option value="N0">The darker among left/right dependent if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N1">The darker among left/right dependent if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N2">The darker among left/right dependent if sample is X, The left one if sample is Y</option>
+<option value="N3">The darker among left/right dependent if sample is X, The right one if sample is Y</option>
+<option value="N4">The darker among left/right dependent if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N5">The darker among left/right dependent if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N6">The darker among left/right dependent if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N7">The darker among left/right dependent if sample is X, The one with circle shape if sample is Y</option>
+<option value="N8">The darker among left/right dependent if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N9">The darker among left/right dependent if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N10">The brighter among left/right dependent if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N11">The brighter among left/right dependent if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N12">The brighter among left/right dependent if sample is X, The left one if sample is Y</option>
+<option value="N13">The brighter among left/right dependent if sample is X, The right one if sample is Y</option>
+<option value="N14">The brighter among left/right dependent if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N15">The brighter among left/right dependent if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N16">The brighter among left/right dependent if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N17">The brighter among left/right dependent if sample is X, The one with circle shape if sample is Y</option>
+<option value="N18">The brighter among left/right dependent if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N19">The brighter among left/right dependent if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N20">The left one if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N21">The left one if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N22">The left one if sample is X, The left one if sample is Y</option>
+<option value="N23">The left one if sample is X, The right one if sample is Y</option>
+<option value="N24">The left one if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N25">The left one if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N26">The left one if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N27">The left one if sample is X, The one with circle shape if sample is Y</option>
+<option value="N28">The left one if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N29">The left one if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N30">The right one if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N31">The right one if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N32">The right one if sample is X, The left one if sample is Y</option>
+<option value="N33">The right one if sample is X, The right one if sample is Y</option>
+<option value="N34">The right one if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N35">The right one if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N36">The right one if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N37">The right one if sample is X, The one with circle shape if sample is Y</option>
+<option value="N38">The right one if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N39">The right one if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N40">The one with brightness 0.99 if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N41">The one with brightness 0.99 if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N42">The one with brightness 0.99 if sample is X, The left one if sample is Y</option>
+<option value="N43">The one with brightness 0.99 if sample is X, The right one if sample is Y</option>
+<option value="N44">The one with brightness 0.99 if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N45">The one with brightness 0.99 if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N46">The one with brightness 0.99 if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N47">The one with brightness 0.99 if sample is X, The one with circle shape if sample is Y</option>
+<option value="N48">The one with brightness 0.99 if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N49">The one with brightness 0.99 if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N50">The one with brightness 0.00 if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N51">The one with brightness 0.00 if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N52">The one with brightness 0.00 if sample is X, The left one if sample is Y</option>
+<option value="N53">The one with brightness 0.00 if sample is X, The right one if sample is Y</option>
+<option value="N54">The one with brightness 0.00 if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N55">The one with brightness 0.00 if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N56">The one with brightness 0.00 if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N57">The one with brightness 0.00 if sample is X, The one with circle shape if sample is Y</option>
+<option value="N58">The one with brightness 0.00 if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N59">The one with brightness 0.00 if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N60">The one with brightness 0.50 if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N61">The one with brightness 0.50 if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N62">The one with brightness 0.50 if sample is X, The left one if sample is Y</option>
+<option value="N63">The one with brightness 0.50 if sample is X, The right one if sample is Y</option>
+<option value="N64">The one with brightness 0.50 if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N65">The one with brightness 0.50 if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N66">The one with brightness 0.50 if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N67">The one with brightness 0.50 if sample is X, The one with circle shape if sample is Y</option>
+<option value="N68">The one with brightness 0.50 if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N69">The one with brightness 0.50 if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N70">The one with circle shape if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N71">The one with circle shape if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N72">The one with circle shape if sample is X, The left one if sample is Y</option>
+<option value="N73">The one with circle shape if sample is X, The right one if sample is Y</option>
+<option value="N74">The one with circle shape if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N75">The one with circle shape if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N76">The one with circle shape if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N77">The one with circle shape if sample is X, The one with circle shape if sample is Y</option>
+<option value="N78">The one with circle shape if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N79">The one with circle shape if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N80">The one with rectangle shape if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N81">The one with rectangle shape if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N82">The one with rectangle shape if sample is X, The left one if sample is Y</option>
+<option value="N83">The one with rectangle shape if sample is X, The right one if sample is Y</option>
+<option value="N84">The one with rectangle shape if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N85">The one with rectangle shape if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N86">The one with rectangle shape if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N87">The one with rectangle shape if sample is X, The one with circle shape if sample is Y</option>
+<option value="N88">The one with rectangle shape if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N89">The one with rectangle shape if sample is X, The one with triangle shape if sample is Y</option>
+<option value="N90">The one with triangle shape if sample is X, The darker among left/right dependent if sample is Y</option>
+<option value="N91">The one with triangle shape if sample is X, The brighter among left/right dependent if sample is Y</option>
+<option value="N92">The one with triangle shape if sample is X, The left one if sample is Y</option>
+<option value="N93">The one with triangle shape if sample is X, The right one if sample is Y</option>
+<option value="N94">The one with triangle shape if sample is X, The one with brightness 0.99 if sample is Y</option>
+<option value="N95">The one with triangle shape if sample is X, The one with brightness 0.00 if sample is Y</option>
+<option value="N96">The one with triangle shape if sample is X, The one with brightness 0.50 if sample is Y</option>
+<option value="N97">The one with triangle shape if sample is X, The one with circle shape if sample is Y</option>
+<option value="N98">The one with triangle shape if sample is X, The one with rectangle shape if sample is Y</option>
+<option value="N99">The one with triangle shape if sample is X, The one with triangle shape if sample is Y</option>
+       
+    </select>
+    Mode:
+    <select onchange="modeSelected(this.value)" id="modeSelect">
+        <option value="Competition">Human vs. NARS competition</option>
+        <option value="Evaluation">System evaluation</option>
+    </select>
+    Option:
+    <button id="difficulty" onclick="changeDifficulty()">Decrease difficulty (remove shades)</button>
+    <script src="options.js"></script>
+    <script>
+    function changeDifficulty() {
+        window.location.href = 'demo_complex.html';
+    }
+    var username = prompt("Welcome, please tell me your name! You will compete against NARS in a scenario where you have to click either on the shape on the left, or on the right, you only have 100 chances. You will always receive feedback for your selection based on a pattern which you and NARS have to figure out, this pattern does not change across the competition, and the correct selection does only depend on the 3 visible objects, and not on prior time steps or choices. Please try to gain the best score! Thank you!")
+    if(username == "")
+    {
+        username = "anonymous"
+    }
+    var shapesGen = [];
+    var mode = "Competition"
+    function modeSelected(value)
+    {
+        mode = value;
+        if(mode == "Evaluation")
+        {
+            document.getElementById('modeSelect').disabled = true;
+        }
+        shapesGen = [];
+    }
+
+    function randomCriteria()
+    {
+        criterias = [
+criteria_N0,
+criteria_N1,
+criteria_N2,
+criteria_N3,
+criteria_N4,
+criteria_N5,
+criteria_N6,
+criteria_N7,
+criteria_N8,
+criteria_N9,
+criteria_N10,
+criteria_N11,
+criteria_N12,
+criteria_N13,
+criteria_N14,
+criteria_N15,
+criteria_N16,
+criteria_N17,
+criteria_N18,
+criteria_N19,
+criteria_N20,
+criteria_N21,
+criteria_N22,
+criteria_N23,
+criteria_N24,
+criteria_N25,
+criteria_N26,
+criteria_N27,
+criteria_N28,
+criteria_N29,
+criteria_N30,
+criteria_N31,
+criteria_N32,
+criteria_N33,
+criteria_N34,
+criteria_N35,
+criteria_N36,
+criteria_N37,
+criteria_N38,
+criteria_N39,
+criteria_N40,
+criteria_N41,
+criteria_N42,
+criteria_N43,
+criteria_N44,
+criteria_N45,
+criteria_N46,
+criteria_N47,
+criteria_N48,
+criteria_N49,
+criteria_N50,
+criteria_N51,
+criteria_N52,
+criteria_N53,
+criteria_N54,
+criteria_N55,
+criteria_N56,
+criteria_N57,
+criteria_N58,
+criteria_N59,
+criteria_N60,
+criteria_N61,
+criteria_N62,
+criteria_N63,
+criteria_N64,
+criteria_N65,
+criteria_N66,
+criteria_N67,
+criteria_N68,
+criteria_N69,
+criteria_N70,
+criteria_N71,
+criteria_N72,
+criteria_N73,
+criteria_N74,
+criteria_N75,
+criteria_N76,
+criteria_N77,
+criteria_N78,
+criteria_N79,
+criteria_N80,
+criteria_N81,
+criteria_N82,
+criteria_N83,
+criteria_N84,
+criteria_N85,
+criteria_N86,
+criteria_N87,
+criteria_N88,
+criteria_N89,
+criteria_N90,
+criteria_N91,
+criteria_N92,
+criteria_N93,
+criteria_N94,
+criteria_N95,
+criteria_N96,
+criteria_N97,
+criteria_N98,
+criteria_N99,
+]
+        return criterias[Math.floor(Math.random() * criterias.length)]
+    }
+    var selectedCriteria = randomCriteria();
+    function criteriumSelected(value) {
+        switch(value) {
+      
+            case "N0": selectedCriteria = criteria_N0; break;
+case "N1": selectedCriteria = criteria_N1; break;
+case "N2": selectedCriteria = criteria_N2; break;
+case "N3": selectedCriteria = criteria_N3; break;
+case "N4": selectedCriteria = criteria_N4; break;
+case "N5": selectedCriteria = criteria_N5; break;
+case "N6": selectedCriteria = criteria_N6; break;
+case "N7": selectedCriteria = criteria_N7; break;
+case "N8": selectedCriteria = criteria_N8; break;
+case "N9": selectedCriteria = criteria_N9; break;
+case "N10": selectedCriteria = criteria_N10; break;
+case "N11": selectedCriteria = criteria_N11; break;
+case "N12": selectedCriteria = criteria_N12; break;
+case "N13": selectedCriteria = criteria_N13; break;
+case "N14": selectedCriteria = criteria_N14; break;
+case "N15": selectedCriteria = criteria_N15; break;
+case "N16": selectedCriteria = criteria_N16; break;
+case "N17": selectedCriteria = criteria_N17; break;
+case "N18": selectedCriteria = criteria_N18; break;
+case "N19": selectedCriteria = criteria_N19; break;
+case "N20": selectedCriteria = criteria_N20; break;
+case "N21": selectedCriteria = criteria_N21; break;
+case "N22": selectedCriteria = criteria_N22; break;
+case "N23": selectedCriteria = criteria_N23; break;
+case "N24": selectedCriteria = criteria_N24; break;
+case "N25": selectedCriteria = criteria_N25; break;
+case "N26": selectedCriteria = criteria_N26; break;
+case "N27": selectedCriteria = criteria_N27; break;
+case "N28": selectedCriteria = criteria_N28; break;
+case "N29": selectedCriteria = criteria_N29; break;
+case "N30": selectedCriteria = criteria_N30; break;
+case "N31": selectedCriteria = criteria_N31; break;
+case "N32": selectedCriteria = criteria_N32; break;
+case "N33": selectedCriteria = criteria_N33; break;
+case "N34": selectedCriteria = criteria_N34; break;
+case "N35": selectedCriteria = criteria_N35; break;
+case "N36": selectedCriteria = criteria_N36; break;
+case "N37": selectedCriteria = criteria_N37; break;
+case "N38": selectedCriteria = criteria_N38; break;
+case "N39": selectedCriteria = criteria_N39; break;
+case "N40": selectedCriteria = criteria_N40; break;
+case "N41": selectedCriteria = criteria_N41; break;
+case "N42": selectedCriteria = criteria_N42; break;
+case "N43": selectedCriteria = criteria_N43; break;
+case "N44": selectedCriteria = criteria_N44; break;
+case "N45": selectedCriteria = criteria_N45; break;
+case "N46": selectedCriteria = criteria_N46; break;
+case "N47": selectedCriteria = criteria_N47; break;
+case "N48": selectedCriteria = criteria_N48; break;
+case "N49": selectedCriteria = criteria_N49; break;
+case "N50": selectedCriteria = criteria_N50; break;
+case "N51": selectedCriteria = criteria_N51; break;
+case "N52": selectedCriteria = criteria_N52; break;
+case "N53": selectedCriteria = criteria_N53; break;
+case "N54": selectedCriteria = criteria_N54; break;
+case "N55": selectedCriteria = criteria_N55; break;
+case "N56": selectedCriteria = criteria_N56; break;
+case "N57": selectedCriteria = criteria_N57; break;
+case "N58": selectedCriteria = criteria_N58; break;
+case "N59": selectedCriteria = criteria_N59; break;
+case "N60": selectedCriteria = criteria_N60; break;
+case "N61": selectedCriteria = criteria_N61; break;
+case "N62": selectedCriteria = criteria_N62; break;
+case "N63": selectedCriteria = criteria_N63; break;
+case "N64": selectedCriteria = criteria_N64; break;
+case "N65": selectedCriteria = criteria_N65; break;
+case "N66": selectedCriteria = criteria_N66; break;
+case "N67": selectedCriteria = criteria_N67; break;
+case "N68": selectedCriteria = criteria_N68; break;
+case "N69": selectedCriteria = criteria_N69; break;
+case "N70": selectedCriteria = criteria_N70; break;
+case "N71": selectedCriteria = criteria_N71; break;
+case "N72": selectedCriteria = criteria_N72; break;
+case "N73": selectedCriteria = criteria_N73; break;
+case "N74": selectedCriteria = criteria_N74; break;
+case "N75": selectedCriteria = criteria_N75; break;
+case "N76": selectedCriteria = criteria_N76; break;
+case "N77": selectedCriteria = criteria_N77; break;
+case "N78": selectedCriteria = criteria_N78; break;
+case "N79": selectedCriteria = criteria_N79; break;
+case "N80": selectedCriteria = criteria_N80; break;
+case "N81": selectedCriteria = criteria_N81; break;
+case "N82": selectedCriteria = criteria_N82; break;
+case "N83": selectedCriteria = criteria_N83; break;
+case "N84": selectedCriteria = criteria_N84; break;
+case "N85": selectedCriteria = criteria_N85; break;
+case "N86": selectedCriteria = criteria_N86; break;
+case "N87": selectedCriteria = criteria_N87; break;
+case "N88": selectedCriteria = criteria_N88; break;
+case "N89": selectedCriteria = criteria_N89; break;
+case "N90": selectedCriteria = criteria_N90; break;
+case "N91": selectedCriteria = criteria_N91; break;
+case "N92": selectedCriteria = criteria_N92; break;
+case "N93": selectedCriteria = criteria_N93; break;
+case "N94": selectedCriteria = criteria_N94; break;
+case "N95": selectedCriteria = criteria_N95; break;
+case "N96": selectedCriteria = criteria_N96; break;
+case "N97": selectedCriteria = criteria_N97; break;
+case "N98": selectedCriteria = criteria_N98; break;
+case "N99": selectedCriteria = criteria_N99; break;
+
+            default: console.log("Invalid option selected");
+        }
+        if(value != "random")
+        {
+            document.getElementById('modeSelect').value = "Evaluation";
+            modeSelected("Evaluation")
+        }
+    }
+
+//>> OUTPUT TO TEXT AREAS
+var stats = document.getElementById('stats');
+function stat(text)
+{
+    stats.value = text + "\n";
+    stats.scrollTop = stats.scrollHeight;
+}
+var output = document.getElementById('output');
+var lastaction = "";
+function print(text)
+{
+    console.log(text);
+    if(text.startsWith("^"))
+    {
+        lastaction = text.split(" ")[0];
+    }
+    output.value += text + "\n";
+    //output.scrollTop = output.scrollHeight;
+}
+//<<<<<<<<<<<<<<
+
+//>> NAR MODULE INTERFACE AND INITIALIZATION
+var Module = 
+{
+  arguments: ['nothing'],
+  'print': function(text) { print(text) },
+  'printErr': function(text) { print(text) },
+};
+    </script>
+    <script src="NAR.js"></script>
+    <script>
+
+function NAR_AddInput(narsese)
+{
+    //console.log("WWWWW: "+narsese)
+    charptr = stringToNewUTF8(narsese + "\n")
+    Module._Shell_ProcessInput(charptr);
+    Module._free(charptr);
+}
+function NAR_INIT()
+{
+    Module._Shell_NARInit();
+}
+var isInitialized = false;
+Module.onRuntimeInitialized = () => 
+{
+    isInitialized = true;
+};
+//<<<<<<<<<<<<<<
+
+document.addEventListener("DOMContentLoaded", function ()
+{
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const shapes = [];
+    function clearCanvas()
+    {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function generateShape(loc)
+    {
+        var labels, shapes, colors, shades;
+        if(loc == "middle")
+        {
+            shapes = ["rectangle"];
+            colors = ["red"];
+            labels = ["X", "Y"];
+            shades = ["B_0.0"]
+        }
+        else
+        {
+            shapes = ["triangle", "rectangle", "circle"];
+            colors = ["black"]; //, "blue", "green", "yellow"];
+           // colors = ["red", "blue", "green", "yellow"];
+            //const shades = ["B_0.0", "B_0.5", "B_0.9"];
+            //shades = ["B_0.0", "B_0.1", "B_0.2", "B_0.3", "B_0.4", "B_0.5", "B_0.6", "B_0.7", "B_0.8", "B_0.9"];
+            
+            shades = [];
+            // Loop from 0 to 99 to create the shades
+            for (let i = 0; i < 100; i++) {
+                // Format the number with two decimal places
+                let shadeValue = i / 100;
+                // Add the shade to the array in the format "B_0.XX"
+                shades.push(`B_${shadeValue.toFixed(2)}`);
+            }
+            
+            labels = [""];
+        }
+        return {
+            shape: shapes[Math.floor(Math.random() * shapes.length)],
+            color: colors[Math.floor(Math.random() * colors.length)],
+            shade: shades[Math.floor(Math.random() * shades.length)],
+            label: labels[Math.floor(Math.random() * labels.length)],
+            location: loc
+        };
+    }
+
+    function informNAR(object, position)
+    {
+        locX = "X_"
+        if(position == "left")
+        {
+            locX += "0.0"
+        }
+        else
+        if(position == "right")
+        {
+            locX += "0.9"
+        }
+        else
+        {
+            locX += "0.5"
+        }
+        if(object.label == "")
+        {
+            NAR_AddInput("<(" + locX + " * " + object.shape + ") --> shape>. :|:")
+            NAR_AddInput("*concurrent")
+            //NAR_AddInput("<(" + locX + " * " + object.color + ") --> color>. :|:")
+            //NAR_AddInput("*concurrent")
+            NAR_AddInput("<(" + locX + " * " + object.shade + ") --> shade>. :|:")
+        }
+        else
+        {
+            NAR_AddInput("<(" + locX + " * " + object.label + ") --> ocr>. :|:")
+        }
+    }
+
+    var shapeAddIndex = 0;
+    var shapeIter = 0;
+    var middleShape = false;
+    var leftShape = false;
+    var rightShape = false;
+    function fairShape(direction)
+    {
+        var mShape = generateShape("middle");
+        var lShape = generateShape("left");
+        var rShape = generateShape("right");
+        var isok = false;
+        if(direction == "left" && selectedCriteria(lShape, lShape, mShape, rShape) && !selectedCriteria(rShape, lShape, mShape, rShape))
+        {
+            isok = true;
+        }
+        if(direction == "right" && selectedCriteria(rShape, lShape, mShape, rShape) && !selectedCriteria(lShape, lShape, mShape, rShape))
+        {
+            isok = true;
+        }
+        if(isok)
+        {
+            shapesGen[shapeAddIndex] = [];
+            shapesGen[shapeAddIndex][0] = mShape;
+            shapesGen[shapeAddIndex][1] = lShape;
+            shapesGen[shapeAddIndex][2] = rShape;
+            shapeAddIndex++;
+        }
+    }
+
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        // While there remain elements to shuffle.
+        while (currentIndex > 0) {
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+              array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    function generateFairShapes()
+    {
+        shapeAddIndex = 0;
+        shapesGen = [];
+        while(shapesGen.length < 50)
+        {
+            fairShape("left")
+        }
+        while(shapesGen.length < 100)
+        {
+            fairShape("right")
+        }
+        shuffle(shapesGen)
+    }
+
+    function addShapes()
+    {
+        if(shapesGen.length == 0)
+        {
+            generateFairShapes()
+        }
+        clearCanvas();
+        shapes.length = 0;
+
+        middleShape = shapesGen[shapeIter][0];
+        const middleX = canvas.width / 2;
+        const middleY = 50;
+        drawShape(middleShape.label, middleShape.shade, middleShape.shape, middleX, middleY, middleShape.color);
+        shapes.push({ label: middleShape.label, shade: middleShape.shade, shape: middleShape.shape, color: middleShape.color, x: middleX, y: middleY, location: "middle" });
+
+        leftShape = shapesGen[shapeIter][1];
+        const sideXLeft = 50;
+        const sideY = canvas.height - 100;
+        drawShape(leftShape.label, leftShape.shade, leftShape.shape, sideXLeft, sideY, leftShape.color);
+        shapes.push({ label: leftShape.label, shade: leftShape.shade, shape: leftShape.shape, color: leftShape.color, x: sideXLeft, y: sideY, location: "left" });
+
+        rightShape = shapesGen[shapeIter][2];
+        const sideXRight = canvas.width - 100;
+        drawShape(rightShape.label, rightShape.shade, rightShape.shape, sideXRight, sideY, rightShape.color);
+        shapes.push({ label: rightShape.label, shade: rightShape.shade, shape: rightShape.shape, color: rightShape.color,  x: sideXRight, y: sideY, location: "right" });
+
+        informNAR(middleShape, "middle");
+        NAR_AddInput("*concurrent")
+        informNAR(leftShape, "left");
+        NAR_AddInput("*concurrent")
+        informNAR(rightShape, "right");
+        NAR_AddInput("5")
+
+        shapeIter = (shapeIter + 1) % 100;
+    }
+
+
+    function adjustBrightness(color, brightness) {
+        // Convert named color to hex
+        let hexColor = color;
+
+        // Convert hex color to RGB
+        let bigint = parseInt(hexColor.slice(1), 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+
+        // Adjust brightness (clamp between 0 and 255)
+        r = Math.max(0, Math.min(255, r + brightness));
+        g = Math.max(0, Math.min(255, g + brightness));
+        b = Math.max(0, Math.min(255, b + brightness));
+
+        // Convert back to hex
+        let adjustedHexColor = `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
+
+        return adjustedHexColor;
+    }
+
+    function drawShape(label, shade, shape, x, y, color) {
+        var shadeval = parseFloat(shade.replace("B_",""))*255
+        ctx.fillStyle = color
+        ctx.fillStyle = adjustBrightness(ctx.fillStyle, shadeval);
+
+        if(label == "")
+        {
+            if (shape === "triangle") {
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + 50, y + 50);
+                ctx.lineTo(x - 50, y + 50);
+                ctx.fill();
+            } else if (shape === "rectangle") {
+                ctx.fillRect(x, y, 100, 100);
+            } else if (shape === "circle") {
+                ctx.beginPath();
+                ctx.arc(x, y, 50, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+        
+         // Draw the label
+        ctx.font = "40px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(label, x, y);
+    }
+
+    function isInsideShape(mouseX, mouseY, shape) {
+        if (shape.shape === "triangle" || shape.shape == "circle") {
+            return (
+                mouseY >= shape.y &&
+                mouseY <= shape.y + 50 &&
+                mouseX >= shape.x - 50 &&
+                mouseX <= shape.x + 50
+            );
+        } else if (shape.shape === "rectangle") {
+            return (
+                mouseY >= shape.y &&
+                mouseY <= shape.y + 100 &&
+                mouseX >= shape.x &&
+                mouseX <= shape.x + 100
+            );
+        }
+    }
+
+    var output = document.getElementById('output');
+    function regenerateScene() {
+        output.value = "";
+        addShapes();
+    }
+
+    var regtimer = false;
+    function regentimer()
+    {
+        clearInterval(regtimer);
+        regenerateScene()
+        //stat("");
+        regtimer = false;
+    }
+    
+    var sys_successes = 0;
+    var sys_failures = 0;
+    var usr_successes = 0;
+    var usr_failures = 0;
+    var time = 0;
+    
+    function perform(chosenShape, skip)
+    {
+        if(regtimer != false)
+        {
+            //regentimer()
+            //clearInterval(regtimer);
+            //regtimer = false;
+            return;
+        }
+        if(chosenShape != false || skip)
+        {
+            time++
+            lastaction = "";
+            NAR_AddInput("G! :|:");
+            if(lastaction == "") //always choose an option
+            {
+                actions = ["^left", "^right"]
+                lastaction = actions[Math.floor(Math.random() * actions.length)]
+                NAR_AddInput(lastaction + ". :|:")
+            }
+            result = ""
+            systemShape = false;
+            if(lastaction == "^left")
+            {
+                systemShape = leftShape;
+            }
+            if(lastaction == "^right")
+            {
+                systemShape = rightShape;
+            }
+            if(systemShape != false && selectedCriteria(systemShape, leftShape, middleShape, rightShape))
+            {
+                NAR_AddInput("G. :|:")
+                result = "correct"
+                sys_successes += 1
+                //NAR_AddInput("10")
+            }
+            else
+            if(systemShape != false)
+            {
+                NAR_AddInput("G. :|: %0.0;0.99999%")
+                result = "wrong"
+                sys_failures += 1
+                //NAR_AddInput("100")
+            }
+            NAR_AddInput("30")
+            human = "\n\n";
+            var human_ratio = 0;
+            var sys_ratio = 0;
+            if(mode == "Competition")
+            {
+                humanIsRight = selectedCriteria(chosenShape, leftShape, middleShape, rightShape);
+                console.log(chosenShape)
+                resultHuman = "wrong";
+                if(humanIsRight)
+                {
+                    resultHuman = "correct"
+                    usr_successes++
+                }
+                else
+                {
+                    usr_failures++
+                }
+                alert(resultHuman)
+                if((usr_successes + usr_failures) != 0)
+                {
+                    human_ratio = (usr_successes / (usr_successes + usr_failures))
+                }
+                plotValue("human", human_ratio, false)
+                human = "\n\nHUMAN DID: ^" + chosenShape.location + " AND WAS: " + resultHuman +
+                 "\n ratio:" + human_ratio +
+                 "\n total:" + (usr_successes + usr_failures)
+            }
+            if((sys_successes + sys_failures) != 0)
+            {
+                sys_ratio = (sys_successes / (sys_successes + sys_failures))
+            }
+            if(mode == "Competition") //do not reveal system's choices in competition mode
+            {
+                stat("SYSTEM WAS: " + result +
+                 "\n ratio:" + sys_ratio +
+                 "\n total:" + (sys_successes + sys_failures) + human + "\n\nt=" + time + "/100")
+            }
+            else
+            {
+                stat("SYSTEM DID: " + lastaction + " AND WAS: " + result +
+                 "\n ratio:" + sys_ratio +
+                 "\n total:" + (sys_successes + sys_failures) + human+ "\n\nt=" + time + "/100")
+            }
+            plotValue("sys", sys_ratio, true)
+            if(mode != "Competition" && (sys_successes + sys_failures) == 100)
+            {
+                alert("100 steps reached, press Ok to continue. Also the criteria, in case you wonder, was:\n"+selectedCriteria.toString());
+            }
+            if(mode == "Competition" && (sys_successes + sys_failures) == 100)
+            {
+                // Encode array elements
+                var retarr=[];
+                var digits_after_comma = 2;
+                retarr.push("name");
+                retarr.push(username);
+                retarr.push("criteria");
+                retarr.push(selectedCriteria.toString().split("criteria_")[1].split("(")[0])
+                retarr.push("human");
+                retarr.push(human_ratio)
+                retarr.push("sys");
+                retarr.push(sys_ratio)
+                retarr.push("humanrun")
+                for (var i = 0; i < human_values.length; i++) {
+                  retarr.push(human_values[i].toFixed(digits_after_comma));
+                }
+                retarr.push("sysrun")
+                for (var i = 0; i < sys_values.length; i++) {
+                  retarr.push(sys_values[i].toFixed(digits_after_comma));
+                }
+                var combinedData = retarr.toString();
+                var outcome = "tie"
+                if(sys_ratio > human_ratio)
+                {
+                    outcome = "defeat"
+                }
+                if(sys_ratio < human_ratio)
+                {
+                    outcome = "victory"
+                }
+                alert("Your " + outcome + " is of scientific value, you may create a screenshot of the graph before closing this popup window! Also the criteria, in case you wonder, was:\n"+selectedCriteria.toString());
+                var url = 'https://script.google.com/macros/s/AKfycbw-iWD4WplfNkfKnRgAyp1MneXV29jQ8VMIue1g_24R2jOy5Hr4AdLsCzesLRrEiIvEjg/exec?data=' + combinedData;
+                window.location.replace(url);
+            }
+            regtimer = setInterval(regentimer, 10); //2000
+
+        }
+    }
+
+    function automaticPerform()
+    {
+        perform(false, true);
+    }
+
+    canvas.addEventListener("click", function (e) {
+        const mouseX = e.clientX - canvas.getBoundingClientRect().left;
+        const mouseY = e.clientY - canvas.getBoundingClientRect().top;
+        var chosenShape = false;
+        shapes.forEach((shape) => {
+            if (isInsideShape(mouseX, mouseY, shape))
+            {
+                chosenShape = shape;
+                document.getElementById('difficulty').disabled = true;
+                document.getElementById('modeSelect').disabled = true;
+                document.getElementById('criteriaSelector').disabled = true;
+            }
+        });
+        if(chosenShape != false && chosenShape.location == "middle")
+        {
+            return;
+        }
+        
+        perform(chosenShape, false);
+    });
+
+    //We hadd the shapes once NARS has been initialized:
+    const timer = setInterval(checkCondition, 100);
+    const updatetimer = setInterval(update, 100);
+    function update() {
+        if(mode == "Evaluation")
+        {
+            setInterval(automaticPerform, 100);
+        }
+    }
+    function checkCondition() {
+        if (isInitialized) {
+            NAR_INIT();
+            NAR_AddInput("*volume=0")
+            NAR_AddInput("*babblingops=2")
+            //NAR_AddInput("*motorbabbling=0.1")
+            NAR_AddInput("*decisionthreshold=0.51") //alternative: NAR_AddInput("*motorbabbling=0.1")
+            //NAR_AddInput("*space 10 X")
+            NAR_AddInput("*space 100 B")
+            addShapes();
+            clearInterval(timer);
+        } else {
+            console.log("Condition not met.");
+        }
+    }
+
+    // Get the plot element and its context
+      var plot = document.getElementById("plot");
+      var ctx2 = plot.getContext("2d");
+
+      // Set initial variables
+      var human_values = [];
+      var sys_values = [];
+
+      // Function to draw the graph
+      function drawGraph() {
+        ctx2.clearRect(0, 0, plot.width, plot.height);
+        ctx2.strokeStyle = "black";
+        // Draw x and y axis
+        ctx2.beginPath();
+        ctx2.moveTo(0, plot.height / 2);
+        ctx2.lineTo(plot.width, plot.height / 2);
+        ctx2.stroke();
+        ctx2.beginPath();
+        ctx2.moveTo(0, 0);
+        ctx2.lineTo(0, plot.height);
+        ctx2.stroke();
+        // Plot human_values
+        ctx2.beginPath();
+        ctx2.moveTo(0, plot.height - human_values[0] * plot.height);
+        for (var i = 1; i < human_values.length; i++) {
+          var x = (i / human_values.length) * plot.width;
+          var y = plot.height - human_values[i] * plot.height;
+          ctx2.lineTo(x, y);
+        }
+        ctx2.strokeStyle = "red";
+        ctx2.stroke();
+        // Plot sys_values
+        ctx2.beginPath();
+        ctx2.moveTo(0, plot.height - sys_values[0] * plot.height);
+        for (var i = 1; i < sys_values.length; i++) {
+          var x = (i / sys_values.length) * plot.width;
+          var y = plot.height - sys_values[i] * plot.height;
+          ctx2.lineTo(x, y);
+        }
+        ctx2.strokeStyle = "blue";
+        ctx2.stroke();
+      }
+
+      // Function to handle each click
+      function plotValue(who, value, draw) {
+        // Add the value to the array
+        if(who == "human")
+        {
+            human_values.push(value);
+        }
+        else
+        if(who == "sys")
+        {
+            sys_values.push(value);
+        }
+        if(draw)
+        {
+            drawGraph();
+        }
+      }
+
+      // Function to handle each click
+      function handleClick() {
+        var value = Math.random();
+        plotValue("sys", value, true);
+        document.addEventListener("click", handleClick);
+        drawGraph();
+      }
+    });
+    </script>
+    
+</body>
+</html>
