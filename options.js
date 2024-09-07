@@ -1815,3 +1815,1384 @@ function criteria_m19(chosenShape, leftShape, middleShape, rightShape)
     }
     return chosenShape.location == "left";
 }
+
+function criteria_N0(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N1(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N2(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N3(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N4(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N5(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N6(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N7(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N8(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N9(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N10(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N11(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N12(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N13(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N14(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N15(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N16(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N17(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N18(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N19(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N20(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N21(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N22(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N23(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N24(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N25(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N26(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N27(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N28(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N29(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "left";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N30(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N31(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N32(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N33(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N34(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N35(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N36(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N37(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N38(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N39(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.location == "right";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N40(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N41(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N42(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N43(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N44(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N45(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N46(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N47(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N48(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N49(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N50(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N51(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N52(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N53(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N54(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N55(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N56(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N57(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N58(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N59(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N60(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N61(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N62(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N63(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N64(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N65(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N66(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N67(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N68(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N69(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N70(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N71(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N72(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N73(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N74(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N75(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N76(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N77(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N78(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N79(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N80(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N81(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N82(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N83(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N84(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N85(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N86(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N87(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N88(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N89(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
+function criteria_N90(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(darker(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(darker(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }return false;
+               }
+function criteria_N91(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    if(brighter(leftShape, rightShape))
+                    {
+                        return chosenShape.location == "left";
+                    }
+                    else
+                    if(brighter(rightShape, leftShape))
+                    {
+                        return chosenShape.location == "right";
+                    }
+                }
+                return false;
+               }
+function criteria_N92(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "left";
+                }
+             return false;
+               }
+function criteria_N93(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.location == "right";
+                }
+             return false;
+               }
+function criteria_N94(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.99";
+                }
+             return false;
+               }
+function criteria_N95(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.00";
+                }return false;
+               }
+function criteria_N96(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shade == "B_0.50";
+                }
+             return false;
+               }
+function criteria_N97(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "circle";
+                }
+             return false;
+               }
+function criteria_N98(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "rectangle";
+                }
+             return false;
+               }
+function criteria_N99(chosenShape, leftShape, middleShape, rightShape)    
+              {if(middleShape.label == "X")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             if(middleShape.label == "Y")
+                {
+                    return chosenShape.shape == "triangle";
+                }
+             return false;
+               }
