@@ -194,5 +194,7 @@
 #define TERMS_WITH_VARS_AND_ATOMS_FILTER true
 //Use functional equivalence
 #define FUNCTIONAL_EQUIVALENCE false
+//Whether to derive functional equivalences without variables too
+#define FUNCTIONAL_EQUIVALENCE_SPECIFIC false
 
 #endif
