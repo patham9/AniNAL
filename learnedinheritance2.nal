@@ -1,0 +1,151 @@
+*volume=0
+*motorbabbling=false
+*setopname 1 ^push
+*setopname 2 ^say
+
+//learn if you push over a bottle with label "RED_COLOR" you will see red color spilled:
+<(front * WHITE_COLOR) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+<({SELF} * front) --> ^push>. :|:
+<(front * white) --> color>. :|:
+
+100
+
+//learn if you push over a bottle with label "RED_COLOR" you will see red color spilled:
+<(front * RED_COLOR) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+<({SELF} * front) --> ^push>. :|:
+<(front * red) --> color>. :|:
+
+100
+
+//learn if you push over a bottle with label "TOMATO_JUICE" you will see red-ish color spilled:
+<(front * TOMATO_JUICE) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+<({SELF} * front) --> ^push>. :|:
+<(front * red) --> color>. :|: %0.8%
+
+100
+
+//learn if you push over a bottle with label "TOMATO_JUICE" you will see red-ish color spilled:
+<(front * WALL_PAINT) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+<({SELF} * front) --> ^push>. :|:
+<(front * white) --> color>. :|: %0.8%
+
+100
+
+//learn if you push over a bottle with other label you will seldomly see red or white color spilled:
+<(front * WHATEVER) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+<({SELF} * front) --> ^push>. :|:
+<(front * red) --> color>. :|: %0.1%
+<(front * white) --> color>. :|: %0.1%
+
+100
+
+//if the system wants to spill red color but it sees a bottle labelled TOMATO_JUICE it would still push it over:
+<(front * TOMATO_JUICE) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+<(front * red) --> color>! :|:
+//expected: ^push executed with args ({SELF} * front)
+//as expected as this leads to red-ish color
+
+100
+
+//if the system wants to spill white color but it sees a bottle labelled WALL_PAINT it would still push it over:
+<(front * WALL_PAINT) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+<(front * white) --> color>! :|:
+//expected: ^push executed with args ({SELF} * front)
+//as expected as this leads to red-ish color
+
+
+100
+
+//now imagine we teach the system to say a certain phrase to refer to the RED_COLOR label and its location:
+<(left * RED_COLOR) --> label>. :|:
+<({SELF} * (SOUNDLEFT * SOUNDRED)) --> ^say>. :|:
+G. :|:
+
+100
+
+<(right * RED_COLOR) --> label>. :|:
+<({SELF} * (SOUNDRIGHT * SOUNDRED)) --> ^say>. :|:
+G. :|:
+
+100
+
+<(front * RED_COLOR) --> label>. :|:
+<({SELF} * (SOUNDFRONT * SOUNDRED)) --> ^say>. :|:
+G. :|:
+
+100
+
+//now imagine we teach the system to say a certain phrase to refer to the RED_COLOR label and its location:
+<(left * WHITE_COLOR) --> label>. :|:
+<({SELF} * (SOUNDLEFT * SOUNDWHITE)) --> ^say>. :|:
+G. :|:
+
+100
+
+<(right * WHITE_COLOR) --> label>. :|:
+<({SELF} * (SOUNDRIGHT * SOUNDWHITE)) --> ^say>. :|:
+G. :|:
+
+100
+
+<(front * WHITE_COLOR) --> label>. :|:
+<({SELF} * (SOUNDFRONT * SOUNDWHITE)) --> ^say>. :|:
+G. :|:
+
+100
+
+//the system would now be expected to use the same label for the tomato juice bottle
+//because it led to the same outcome of seeing red color when spilling it
+//and will also use the word SOUNDFRONT in front:
+<(front * TOMATO_JUICE) --> label>. :|:
+*concurrent
+<(front * bottle) --> shape>. :|:
+G! :|:
+//expected: ^say executed with args ({SELF} * (SOUNDFRONT * SOUNDRED))
+
+100
+
+//and will also use the word SOUNDLEFT to the left:
+<(left * TOMATO_JUICE) --> label>. :|:
+*concurrent
+<(left * bottle) --> shape>. :|:
+G! :|:
+//expected: ^say executed with args ({SELF} * (SOUNDLEFT * SOUNDRED))
+
+100
+
+//and will also use the word SOUNDFRONT to the right:
+<(right * TOMATO_JUICE) --> label>. :|:
+*concurrent
+<(right * bottle) --> shape>. :|:
+G! :|:
+//expected: ^say executed with args ({SELF} * (SOUNDRIGHT * SOUNDRED))
+
+100
+
+//also the learned implications can be explicitly asked for, whereby it learned that TOMATO_JUICE can not fully replace RED_COLOR as it only leads to red-ish color:
+<<($1 * RED_COLOR) --> label> ==> <($1 * TOMATO_JUICE) --> label>>?
+//expected: Answer: <<($1 * RED_COLOR) --> label> ==> <($1 * TOMATO_JUICE) --> label>>. Truth: frequency=1.000000, confidence=0.042627
+<<($1 * TOMATO_JUICE) --> label> ==> <($1 * RED_COLOR) --> label>>?
+//expected: Answer: <<($1 * TOMATO_JUICE) --> label> ==> <($1 * RED_COLOR) --> label>>. Truth: frequency=0.800000, confidence=0.052172
+
+//and will also use the word SOUNDFRONT to the right:
+<(left * WALL_PAINT) --> label>. :|:
+*concurrent
+<(left * bottle) --> shape>. :|:
+G! :|:
+//expected: ^say executed with args ({SELF} * (SOUNDRIGHT * SOUNDRED))
