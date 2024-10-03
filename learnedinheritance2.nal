@@ -148,4 +148,7 @@ G! :|:
 *concurrent
 <(left * bottle) --> shape>. :|:
 G! :|:
-//expected: ^say executed with args ({SELF} * (SOUNDRIGHT * SOUNDRED))
+//expected: ^say executed with args ({SELF} * (SOUNDLEFT * SOUNDWHITE))
+
+<<($1 * WALL_PAINT) --> label> ==> <($1 * ?1) --> label>>?
+//expected: Answer: <<($1 * WALL_PAINT) --> label> ==> <($1 * WHITE_COLOR) --> label>>. Truth: frequency=0.800000, confidence=0.052172
