@@ -21,7 +21,7 @@
 
 100
 
-//learn if you push over a bottle without label you will seldomly see red color spilled:
+//learn if you push over a bottle with other label you will seldomly see red color spilled:
 <(front * WHATEVER) --> label>. :|:
 *concurrent
 <(front * bottle) --> shape>. :|:
