@@ -193,10 +193,14 @@
 //Filtering sub-statement terms with variables and atoms both like (&, $1, a)
 #define TERMS_WITH_VARS_AND_ATOMS_FILTER true
 //Use functional equivalence
-#define FUNCTIONAL_EQUIVALENCE false
+#define FUNCTIONAL_EQUIVALENCE true
 //Whether to derive functional equivalences without variables too
-#define FUNCTIONAL_EQUIVALENCE_SPECIFIC false
+#define FUNCTIONAL_EQUIVALENCE_SPECIFIC true
 //Whether functional equivalences can only be dervived between sequences of equal length
 #define FUNCTIONAL_EQUIVALENCE_LENGTH_RESTRICTION true
+//Whether functional equivalence can only be established without a temporal link with same condition and postcondition
+#define FUNCTIONAL_EQUIVALENCE_NONTEMPORAL_RESTRICTION true
+//Functional equivalence nontemporal restriction truth expectation threshold
+#define FUNCTIONAL_EQUIVALENCE_NONTEMPORAL_EXP 0.5
 
 #endif
