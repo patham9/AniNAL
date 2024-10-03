@@ -61,7 +61,7 @@ G. :|:
 
 //the system would now be expected to use the same label for the tomato juice bottle
 //because it led to the same outcome of seeing red color when spilling it
-//and will also use the word SOUNDRIGHT in front:
+//and will also use the word SOUNDFRONT in front:
 <(front * TOMATO_JUICE) --> label>. :|:
 *concurrent
 <(front * bottle) --> shape>. :|:
