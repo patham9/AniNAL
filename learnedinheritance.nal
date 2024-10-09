@@ -91,3 +91,4 @@ G! :|:
 //expected: Answer: <<($1 * RED_COLOR) --> label> ==> <($1 * TOMATO_JUICE) --> label>>. Truth: frequency=1.000000, confidence=0.042627
 <<($1 * TOMATO_JUICE) --> label> ==> <($1 * RED_COLOR) --> label>>?
 //expected: Answer: <<($1 * TOMATO_JUICE) --> label> ==> <($1 * RED_COLOR) --> label>>. Truth: frequency=0.800000, confidence=0.052172
+//FOR THIS EXAMPLE, IN Config.h SET #define FUNCTIONAL_EQUIVALENCE true!!!
