@@ -4,7 +4,8 @@ git checkout portability
 git stash
 git pull
 cp ../Config.h ./src/
-sh build_browser.sh
 sh build.sh
+echo "Now building optional browser demos:"
+sh build_browser.sh
 cp NAR.wasm ../
 cp NAR.js ../
