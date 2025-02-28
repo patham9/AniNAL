@@ -34,6 +34,10 @@
 #define ANTICIPATION_CONFIDENCE_INITIAL 0.01
 //Anticipate for concrete yet unexperienced outcomes derived from generals
 #define ANTICIPATE_FOR_NOT_EXISTING_SPECIFIC_TEMPORAL_IMPLICATION true
+//Use top-k implication links only (the others can grow / accumulate evidence)
+#define TOP_K_DECLARATIVE_IMPLICATIONS 20
+//When a concept belief was last updated to be used for declarative implication deduction
+#define BELIEF_LAST_USED_TOLERANCE 5
 
 /*---------------------*/
 /* Decision parameters */
@@ -54,10 +58,6 @@
 #define SUBSUMPTION_FREQUENCY_THRESHOLD 0.5
 //How long goal events describing bad outcomes are considered in decision making
 #define NEG_GOAL_AGE_MAX EVENT_BELIEF_DISTANCE
-//Use top-k implication links only (the others can grow / accumulate evidence)
-#define TOP_K_DECLARATIVE_IMPLICATIONS 1
-//When a concept belief was last updated to be used for declarative implication deduction
-#define BELIEF_LAST_USED_TOLERANCE 5
 
 /*----------------------*/
 /* Attention parameters */
