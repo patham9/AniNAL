@@ -121,7 +121,7 @@
 /* Space parameters */
 /*------------------*/
 //Maximum amount of concepts
-#define CONCEPTS_MAX 1024
+#define CONCEPTS_MAX 4096
 //Amount of buckets for concept hashmap
 #define CONCEPTS_HASHTABLE_BUCKETS CONCEPTS_MAX
 //Maximum amount of belief events attention buffer holds
@@ -135,11 +135,11 @@
 //Maximum size of the stamp in terms of evidential base id's
 #define STAMP_SIZE 10
 //Maximum Implication table size
-#define TABLE_SIZE 400
+#define TABLE_SIZE 120
 //Maximum compound term size
 #define COMPOUND_TERM_SIZE_MAX 64
 //Max. amount of atomic terms, must be <= 2^(sizeof(Atom)*8)
-#define ATOMS_MAX 65536
+#define ATOMS_MAX 255
 //Amount of buckets for atoms hashmap
 #define ATOMS_HASHTABLE_BUCKETS ATOMS_MAX
 //The type of an atom
@@ -177,7 +177,7 @@
 /* Derivation parameters */
 /*-----------------------*/
 //The NAL level of semantic inference
-#define SEMANTIC_INFERENCE_NAL_LEVEL 0
+#define SEMANTIC_INFERENCE_NAL_LEVEL 6
 //Filter for twice appearing atoms
 #define ATOM_APPEARS_TWICE_FILTER true
 //Filter for derivations which include nested implications or equivalences
@@ -207,7 +207,7 @@
 //Functional equivalence nontemporal restriction truth expectation threshold
 #define FUNCTIONAL_EQUIVALENCE_NONTEMPORAL_EXP 0.5
 //Whether functional equivalence should simplify sequences taking out common conditions
-#define FUNCTIONAL_EQUIVALENCE_SIMPLIFY false
+#define FUNCTIONAL_EQUIVALENCE_SIMPLIFY true
 //Declarative implications process per cycle rather than just per event
 #define DECLARATIVE_IMPLICATIONS_CYCLE_PROCESS true
 //Declarative implications allow subgoaling

@@ -205,10 +205,14 @@
     </select>
     Option:
     <button id="difficulty" onclick="changeDifficulty()">Decrease difficulty (remove shades)</button>
+    <button id="difficulty" onclick="changeDifficulty2()">Increase difficulty (continuous shades)</button>
     <script src="options.js"></script>
     <script>
     function changeDifficulty() {
         window.location.href = 'demo_complex.html';
+    }
+    function changeDifficulty2() {
+        window.location.href = 'demo_complex_continuous_shades.html';
     }
     var username = prompt("Welcome, please tell me your name! You will compete against NARS in a scenario where you have to click either on the shape on the left, or on the right, you only have 100 chances. You will always receive feedback for your selection based on a pattern which you and NARS have to figure out, this pattern does not change across the competition, and the correct selection does only depend on the 3 visible objects, and not on prior time steps or choices. Please try to gain the best score! Thank you!")
     if(username == "")
